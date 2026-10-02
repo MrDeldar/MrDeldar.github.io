@@ -1,771 +1,549 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>سیاست حریم خصوصی برنامه‌ی Delody</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/lalezar@5.0.20/index.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/vazirmatn@5.0.19/400.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/vazirmatn@5.0.19/500.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/vazirmatn@5.0.19/700.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Delody | دلدار — جایی که کد و ملودی به هم می‌رسند</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/vazirmatn@latest/index.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/vazirmatn@latest/700.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/vazirmatn@latest/900.css" />
 <style>
-  :root{
-    --bg:#171126;
-    --bg-2:#211836;
-    --bg-3:#2a2044;
-    --ink:#f4ecdd;
-    --muted:#b3a6c9;
-    --amber:#eeb054;
-    --amber-soft:#f6cd8a;
-    --violet:#8f7ad1;
-    --line:rgba(244,236,221,.14);
-    --danger:#e2726e;
-    --ok:#8fd0a0;
-    --shadow:0 24px 60px rgba(6,3,14,.55);
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{
-    background:var(--bg);
-    color:var(--ink);
-    font-family:"Vazirmatn", system-ui, sans-serif;
-    font-size:17px;
-    line-height:2;
-    overflow-x:hidden;
-    position:relative;
-  }
-  ::selection{background:var(--amber);color:#241505}
+:root{
+  --bg:#070a13;
+  --card:rgba(255,255,255,.045);
+  --line:rgba(255,255,255,.09);
+  --text:#eef1f8;
+  --muted:#9aa3b5;
+  --cyan:#22d3ee;
+  --violet:#8b5cf6;
+  --pink:#f472b6;
+  --grad:linear-gradient(120deg,var(--cyan),var(--violet) 55%,var(--pink));
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{
+  font-family:"Vazirmatn",system-ui,sans-serif;
+  background:
+    radial-gradient(900px 520px at 85% -10%, rgba(139,92,246,.16), transparent 60%),
+    radial-gradient(800px 500px at 8% 18%, rgba(34,211,238,.10), transparent 60%),
+    radial-gradient(760px 620px at 50% 110%, rgba(244,114,182,.08), transparent 60%),
+    var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+  line-height:1.9;
+}
+#bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
 
-  /* ---------- background staff lines + glow ---------- */
-  body::before{
-    content:"";
-    position:fixed;inset:0;z-index:0;pointer-events:none;
-    background:
-      radial-gradient(900px 500px at 85% -5%, rgba(238,176,84,.14), transparent 60%),
-      radial-gradient(800px 600px at 8% 108%, rgba(143,122,209,.16), transparent 60%);
-  }
-  .staff-bg{
-    position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
-  }
-  .staff-group{
-    position:absolute;left:0;right:0;height:70px;
-    background:repeating-linear-gradient(to bottom, transparent 0 15px, rgba(244,236,221,.05) 15px 16px);
-  }
-  .staff-group:nth-child(1){top:9%}
-  .staff-group:nth-child(2){top:38%;transform:rotate(-1.5deg)}
-  .staff-group:nth-child(3){top:67%}
-  .staff-group:nth-child(4){top:92%;transform:rotate(1deg)}
+/* ---------- header ---------- */
+header{
+  position:fixed;top:0;right:0;left:0;z-index:50;
+  background:rgba(7,10,19,.65);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.nav{display:flex;align-items:center;gap:22px;height:76px}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text)}
+.logo .ava{width:44px;height:44px;border-radius:50%;overflow:hidden;border:2px solid transparent;background:var(--grad);padding:2px}
+.logo .ava svg{width:100%;height:100%;border-radius:50%;display:block}
+.logo b{font-weight:900;font-size:1.25rem;letter-spacing:.5px}
+.logo small{display:block;color:var(--muted);font-size:.7rem;margin-top:-4px}
+nav.links{margin-right:auto;display:flex;gap:6px}
+nav.links a{color:var(--muted);text-decoration:none;padding:8px 14px;border-radius:12px;font-size:.92rem;transition:.25s}
+nav.links a:hover{color:var(--text);background:rgba(255,255,255,.06)}
+.nav .cta{margin-right:0;margin-left:auto}
+nav.links + .cta{margin-right:0}
+@media(max-width:820px){nav.links{display:none}.logo{margin-right:0}.nav .cta{margin-right:auto}}
 
-  /* ---------- grain ---------- */
-  .noise{
-    position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.07;mix-blend-mode:overlay;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.9'/%3E%3C/svg%3E");
-  }
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 26px;border-radius:16px;text-decoration:none;font-weight:700;font-size:.95rem;border:none;cursor:pointer;transition:.25s;font-family:inherit}
+.btn-primary{background:var(--grad);color:#081018;box-shadow:0 10px 30px rgba(139,92,246,.35)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(139,92,246,.5)}
+.btn-ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan);transform:translateY(-3px)}
 
-  /* ---------- floating notes ---------- */
-  .float-notes{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-  .float-notes span{
-    position:absolute;color:var(--amber);opacity:.14;
-    animation:drift 16s ease-in-out infinite alternate;
-    font-size:2.4rem;
-  }
-  .float-notes span:nth-child(1){top:14%;left:8%;animation-duration:19s}
-  .float-notes span:nth-child(2){top:30%;right:6%;color:var(--violet);animation-duration:23s;font-size:3rem}
-  .float-notes span:nth-child(3){top:58%;left:12%;animation-duration:17s;font-size:1.8rem}
-  .float-notes span:nth-child(4){top:74%;right:14%;color:var(--violet);animation-duration:21s}
-  .float-notes span:nth-child(5){top:44%;left:46%;animation-duration:26s;font-size:2rem}
-  .float-notes span:nth-child(6){top:86%;left:40%;animation-duration:18s;color:var(--violet);font-size:2.6rem}
-  @keyframes drift{
-    from{transform:translateY(0) rotate(-8deg)}
-    to{transform:translateY(-46px) rotate(10deg)}
-  }
+/* ---------- hero ---------- */
+.hero{min-height:100svh;display:flex;align-items:center;padding:130px 0 70px}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;width:100%}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 18px;font-size:.82rem;color:var(--muted)}
+.eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px var(--cyan);animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.35}}
+h1{font-size:clamp(1.9rem,4.6vw,3.3rem);font-weight:900;line-height:1.5;margin:22px 0 14px}
+h1 .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lead{color:var(--muted);font-size:1.05rem;max-width:56ch}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 30px}
+.chip{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:.85rem;display:flex;gap:8px;align-items:center;transition:.25s}
+.chip:hover{transform:translateY(-3px);border-color:var(--violet)}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.eq{display:flex;gap:5px;align-items:flex-end;height:44px;margin-right:8px}
+.eq span{width:6px;border-radius:3px;background:var(--grad);animation:eq 1.1s ease-in-out infinite}
+.eq span:nth-child(1){animation-duration:.9s}
+.eq span:nth-child(2){animation-duration:.7s}
+.eq span:nth-child(3){animation-duration:1.05s}
+.eq span:nth-child(4){animation-duration:.8s}
+.eq span:nth-child(5){animation-duration:.95s}
+@keyframes eq{0%,100%{height:22%}50%{height:95%}}
 
-  main, header.top, footer{position:relative;z-index:2}
+/* vinyl */
+.vinyl-zone{display:grid;place-items:center;position:relative}
+.vinyl{position:relative;width:min(400px,78vw);aspect-ratio:1;border-radius:50%;
+  background:repeating-radial-gradient(circle at 50%, #0b0b10 0 2px, #16161f 2px 4px);
+  box-shadow:0 30px 70px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.07), 0 0 90px rgba(139,92,246,.28);
+  display:grid;place-items:center;animation:spin 16s linear infinite}
+.vinyl .label{width:64%;aspect-ratio:1;border-radius:50%;overflow:hidden;border:6px solid #05050a;box-shadow:inset 0 0 0 2px rgba(255,255,255,.08)}
+.vinyl .label svg{width:100%;height:100%;display:block}
+@keyframes spin{to{transform:rotate(360deg)}}
+.float-note{position:absolute;font-size:1.6rem;animation:floaty 5s ease-in-out infinite;filter:drop-shadow(0 0 10px rgba(34,211,238,.6))}
+.fn1{top:6%;right:10%;color:var(--cyan)}
+.fn2{bottom:10%;right:2%;color:var(--pink);animation-delay:1.2s}
+.fn3{top:16%;left:4%;color:var(--violet);animation-delay:2.2s}
+@keyframes floaty{50%{transform:translateY(-18px) rotate(8deg)}}
+@media(max-width:920px){.hero-grid{grid-template-columns:1fr;gap:44px}.vinyl-zone{order:-1}}
 
-  /* ---------- top bar ---------- */
-  header.top{
-    max-width:1080px;margin:0 auto;padding:26px 24px 8px;
-    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
-  }
-  .logo-mark{
-    width:52px;height:52px;border-radius:14px;flex-shrink:0;
-    background:linear-gradient(145deg,#2c2148,#1b1330);
-    border:1px solid var(--line);
-    display:grid;place-items:center;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 10px 24px rgba(0,0,0,.35);
-    position:relative;overflow:hidden;
-  }
-  .logo-mark::after{content:"";position:absolute;inset:auto 0 8px;height:1px;background:repeating-linear-gradient(to right,transparent 0 6px,rgba(238,176,84,.5) 6px 12px)}
-  .logo-mark svg{width:30px;height:30px}
-  .logo-word{font-family:"Lalezar",cursive;font-size:1.9rem;letter-spacing:.5px;line-height:1}
-  .logo-word em{font-style:normal;color:var(--amber)}
-  .chip{
-    display:inline-flex;align-items:center;gap:8px;
-    border:1px solid var(--line);border-radius:100px;
-    padding:5px 16px;font-size:.82rem;color:var(--muted);
-    background:rgba(255,255,255,.03);
-  }
-  .chip .dot{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok)}
-  .top .spacer{flex:1}
-  .chip.gold{color:var(--amber-soft);border-color:rgba(238,176,84,.35)}
+/* ---------- sections ---------- */
+section{padding:96px 0;position:relative}
+.sec-head{text-align:center;margin-bottom:56px}
+.sec-head .tag{color:var(--cyan);font-size:.85rem;letter-spacing:2px}
+.sec-head h2{font-size:clamp(1.5rem,3.2vw,2.3rem);font-weight:900;margin-top:6px}
+.sec-head h2 .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sec-head p{color:var(--muted);max-width:60ch;margin:10px auto 0}
 
-  /* ---------- hero ---------- */
-  .hero{max-width:1080px;margin:0 auto;padding:64px 24px 40px;position:relative}
-  .kicker{
-    display:inline-flex;align-items:center;gap:12px;color:var(--amber);
-    font-size:.85rem;font-weight:500;letter-spacing:.06em;margin-bottom:18px;
-  }
-  .kicker::before{content:"";width:44px;height:1px;background:var(--amber);opacity:.7}
-  h1.title{
-    font-family:"Lalezar",cursive;
-    font-size:clamp(2.6rem,7vw,5.2rem);
-    line-height:1.25;font-weight:400;
-    margin-bottom:26px;
-    min-height:1.3em;
-  }
-  h1.title .latin{color:var(--amber)}
-  .mask{display:block;overflow:hidden}
-  .mask > span{display:block;transform:translateY(115%);animation:maskUp 1s cubic-bezier(.2,.7,.2,1) forwards}
-  .mask.d2 > span{animation-delay:.25s}
-  @keyframes maskUp{to{transform:translateY(0)}}
+/* piano */
+.piano-box{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:34px;backdrop-filter:blur(8px)}
+.piano{position:relative;display:flex;height:200px;border-radius:16px;overflow:hidden;max-width:760px;margin:26px auto 0;box-shadow:0 20px 50px rgba(0,0,0,.45);touch-action:manipulation}
+.key.white{flex:1;background:linear-gradient(#f8fafc,#dbe2ea);border-left:1px solid #b9c2cd;position:relative;cursor:pointer;transition:.12s}
+.key.white:first-child{border-left:none}
+.key.white i{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);font-style:normal;color:#8a94a1;font-size:.75rem}
+.key.white.active,.key.white:active{background:linear-gradient(#a5f3fc,#c4b5fd);transform:translateY(2px)}
+.key.black{position:absolute;top:0;height:58%;width:7.2%;background:linear-gradient(#3a3f4a,#12151c);border-radius:0 0 6px 6px;z-index:2;cursor:pointer;transition:.12s;box-shadow:0 4px 10px rgba(0,0,0,.5)}
+.key.black.active,.key.black:active{background:linear-gradient(#8b5cf6,#22d3ee);transform:translateY(2px)}
+.piano-hint{text-align:center;color:var(--muted);font-size:.85rem;margin-top:16px}
+.piano-actions{display:flex;justify-content:center;margin-top:20px}
 
-  .statement{
-    font-size:clamp(1.15rem,2.6vw,1.55rem);
-    font-weight:500;line-height:2.1;max-width:820px;color:var(--ink);
-  }
-  mark{
-    background:linear-gradient(transparent 55%, rgba(238,176,84,.35) 55%);
-    color:var(--amber-soft);padding:0 .2em;border-radius:3px;
-  }
-  .hero-note{
-    margin-top:18px;color:var(--muted);font-size:.95rem;max-width:640px;
-  }
+/* timeline */
+.timeline{position:relative;max-width:820px;margin:0 auto}
+.timeline::before{content:"";position:absolute;top:0;bottom:0;right:27px;width:2px;background:linear-gradient(var(--cyan),var(--violet),var(--pink));opacity:.5}
+.t-item{display:flex;gap:24px;margin-bottom:34px;position:relative}
+.t-icon{flex:0 0 56px;height:56px;border-radius:18px;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;font-size:1.5rem;position:relative;z-index:1;box-shadow:0 0 0 6px var(--bg)}
+.t-card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 26px;flex:1;transition:.3s;backdrop-filter:blur(8px)}
+.t-card:hover{transform:translateX(-6px);border-color:rgba(34,211,238,.4)}
+.t-card h3{font-size:1.1rem;margin-bottom:6px}
+.t-card h3 em{font-style:normal;color:var(--cyan)}
+.t-card p{color:var(--muted);font-size:.95rem}
 
-  /* no-collect badges */
-  .badges{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
-  .badge{
-    display:inline-flex;align-items:center;gap:10px;
-    padding:12px 22px;border-radius:12px;
-    background:var(--bg-2);border:1px solid var(--line);
-    font-weight:500;position:relative;
-    transition:transform .3s, border-color .3s;
-  }
-  .badge:hover{transform:translateY(-4px);border-color:rgba(226,114,110,.5)}
-  .badge .x{
-    width:26px;height:26px;border-radius:50%;flex-shrink:0;
-    background:rgba(226,114,110,.15);color:var(--danger);
-    display:grid;place-items:center;font-size:.85rem;font-weight:700;
-  }
-  .badge .strike{position:relative}
-  .badge .strike::after{
-    content:"";position:absolute;top:52%;right:-3%;height:2px;width:0;
-    background:var(--danger);transform:rotate(-4deg);
-    transition:width .7s cubic-bezier(.2,.7,.2,1) .4s;
-  }
-  .badge.in .strike::after{width:106%}
+/* letter */
+.letter{background:linear-gradient(160deg,rgba(34,211,238,.07),rgba(139,92,246,.08));border:1px solid var(--line);border-radius:26px;padding:44px;max-width:860px;margin:64px auto 0;position:relative}
+.letter::before{content:"✉️";position:absolute;top:-22px;right:36px;font-size:2rem;background:var(--bg);padding:0 12px;border-radius:12px}
+.letter h3{font-size:1.3rem;margin-bottom:18px}
+.letter p{color:#cdd4e0;margin-bottom:18px;text-align:justify}
+.letter .sign{display:flex;align-items:center;gap:12px;color:var(--cyan);font-weight:700}
+.letter .sign::before{content:"";width:44px;height:2px;background:var(--grad)}
 
-  /* ---------- marquee ---------- */
-  .marquee{
-    margin:64px 0 0;border-block:1px solid var(--line);
-    background:rgba(255,255,255,.02);overflow:hidden;direction:ltr;
-  }
-  .marquee-track{
-    display:flex;gap:0;width:max-content;direction:rtl;
-    animation:scrollX 30s linear infinite;
-  }
-  .marquee:hover .marquee-track{animation-play-state:paused}
-  .marquee-track span{
-    padding:14px 34px;white-space:nowrap;color:var(--muted);
-    font-size:.95rem;display:flex;align-items:center;gap:34px;
-  }
-  .marquee-track span::after{content:"♪";color:var(--amber)}
-  @keyframes scrollX{from{transform:translateX(0)}to{transform:translateX(50%)}}
+/* delody */
+.delody-card{background:var(--card);border:1px solid var(--line);border-radius:30px;padding:56px 40px;text-align:center;backdrop-filter:blur(10px);position:relative;overflow:hidden}
+.delody-card::after{content:"♪ ♫ ♬";position:absolute;left:-10px;bottom:-14px;font-size:5rem;opacity:.05;letter-spacing:10px}
+.d-logo{width:96px;height:96px;margin:0 auto 18px;filter:drop-shadow(0 12px 30px rgba(139,92,246,.5))}
+.d-word{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:900;letter-spacing:2px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.formula{display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap;margin:28px 0}
+.f-box{background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:16px;padding:10px 26px;font-weight:700;font-size:1.1rem}
+.f-op{font-size:1.5rem;color:var(--cyan)}
+.f-box.res{background:var(--grad);color:#081018;border:none;font-weight:900}
+.badge-soon{display:inline-flex;align-items:center;gap:10px;background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.35);color:var(--cyan);border-radius:999px;padding:10px 24px;font-weight:700;margin-top:8px}
+.badge-soon .dot{width:9px;height:9px;border-radius:50%;background:var(--cyan);animation:pulse 1.6s infinite}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+.feat{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:20px;padding:26px 20px;transition:.3s}
+.feat:hover{transform:translateY(-6px);border-color:rgba(139,92,246,.5)}
+.feat .ic{font-size:2rem;margin-bottom:10px}
+.feat h4{margin-bottom:6px}
+.feat p{color:var(--muted);font-size:.88rem}
+@media(max-width:820px){.features{grid-template-columns:1fr}}
 
-  /* ---------- clauses: sticky two-column ---------- */
-  .clauses{max-width:1080px;margin:0 auto;padding:90px 24px}
-  .clauses-grid{display:grid;grid-template-columns:340px 1fr;gap:56px;align-items:start}
-  .clauses-side{position:sticky;top:40px}
-  .sec-num{
-    font-family:"Lalezar",cursive;color:transparent;
-    -webkit-text-stroke:1px rgba(238,176,84,.6);
-    font-size:2.6rem;line-height:1;display:block;margin-bottom:10px;
-  }
-  .clauses-side h2{
-    font-family:"Lalezar",cursive;font-weight:400;
-    font-size:clamp(1.9rem,4vw,2.7rem);line-height:1.4;margin-bottom:16px;
-  }
-  .clauses-side p{color:var(--muted);font-size:.95rem;line-height:2.1}
-  .side-clef{margin-top:28px;font-size:2.6rem;color:var(--violet);opacity:.7;display:block;transform-origin:top;animation:sway 5s ease-in-out infinite alternate}
-  @keyframes sway{from{transform:rotate(-6deg)}to{transform:rotate(6deg)}}
+/* contact */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:760px;margin:0 auto}
+.c-card{display:flex;align-items:center;gap:18px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px;text-decoration:none;color:var(--text);transition:.3s;backdrop-filter:blur(8px)}
+.c-card:hover{transform:translateY(-6px)}
+.c-card.ig:hover{border-color:#f472b6;box-shadow:0 16px 40px rgba(244,114,182,.2)}
+.c-card.tg:hover{border-color:#22d3ee;box-shadow:0 16px 40px rgba(34,211,238,.2)}
+.c-card .ic{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;flex:0 0 54px}
+.c-card.ig .ic{background:linear-gradient(45deg,#f9ce34,#ee2a7b,#6228d7)}
+.c-card.tg .ic{background:linear-gradient(#37bbfe,#007dbb)}
+.c-card .ic svg{width:28px;height:28px;fill:#fff}
+.c-card b{display:block;font-size:1.05rem}
+.c-card span{color:var(--muted);font-size:.85rem}
+.id-row{display:flex;justify-content:center;align-items:center;gap:14px;margin-top:34px;flex-wrap:wrap}
+.id-pill{direction:ltr;font-weight:900;font-size:1.2rem;letter-spacing:1px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 28px}
+@media(max-width:720px){.contact-grid{grid-template-columns:1fr}}
 
-  .clause-list{display:flex;flex-direction:column;gap:28px}
-  .clause{
-    background:linear-gradient(160deg,var(--bg-2),rgba(33,24,54,.5));
-    border:1px solid var(--line);border-radius:18px;
-    padding:32px 30px;position:relative;overflow:hidden;
-    transition:transform .35s, border-color .35s, box-shadow .35s;
-  }
-  .clause::before{
-    content:"";position:absolute;top:0;right:0;width:100%;height:2px;
-    background:linear-gradient(to left, var(--amber), transparent 65%);
-    transform:scaleX(0);transform-origin:right;transition:transform .6s cubic-bezier(.2,.7,.2,1);
-  }
-  .clause:hover{transform:translateY(-6px);border-color:rgba(238,176,84,.4);box-shadow:var(--shadow)}
-  .clause:hover::before{transform:scaleX(1)}
-  .clause-head{display:flex;align-items:center;gap:18px;margin-bottom:14px}
-  .clause-no{
-    font-family:"Lalezar",cursive;font-size:2rem;color:var(--amber);
-    min-width:52px;height:52px;border:1px dashed rgba(238,176,84,.5);
-    border-radius:50%;display:grid;place-items:center;flex-shrink:0;line-height:1;
-  }
-  .clause h3{font-size:1.2rem;font-weight:700}
-  .clause h3 small{display:block;font-weight:400;color:var(--muted);font-size:.8rem;margin-top:2px}
-  .clause p{color:#ddd2c2;line-height:2.15}
-  .clause .icon{
-    margin-inline-start:auto;width:48px;height:48px;flex-shrink:0;border-radius:12px;
-    background:rgba(143,122,209,.14);display:grid;place-items:center;
-  }
-  .clause .icon svg{width:26px;height:26px;stroke:var(--violet)}
-  .clause-tag{
-    display:inline-block;margin-top:14px;font-size:.78rem;color:var(--amber);
-    border:1px solid rgba(238,176,84,.3);border-radius:100px;padding:3px 14px;
-  }
+footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;color:var(--muted);font-size:.88rem;position:relative;z-index:1}
+footer .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:700}
 
-  /* ---------- reveal ---------- */
-  .rv{opacity:0;transform:translateY(28px);transition:opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1)}
-  .rv.in{opacity:1;transform:none}
-  .rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}.rv.d3{transition-delay:.3s}
+/* reveal */
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .8s ease,transform .8s ease}
+.reveal.visible{opacity:1;transform:none}
 
-  /* ---------- metronome demo ---------- */
-  .demo{
-    background:var(--bg-2);border-block:1px solid var(--line);
-    padding:90px 24px;position:relative;overflow:hidden;
-  }
-  .demo::before{
-    content:"♩";position:absolute;font-size:22rem;color:rgba(244,236,221,.03);
-    left:-40px;bottom:-90px;font-family:serif;pointer-events:none;
-  }
-  .demo-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 380px;gap:60px;align-items:center}
-  .demo h2{font-family:"Lalezar",cursive;font-weight:400;font-size:clamp(1.9rem,4vw,2.7rem);line-height:1.4;margin-bottom:16px}
-  .demo h2 em{font-style:normal;color:var(--amber)}
-  .demo .desc{color:var(--muted);line-height:2.2;margin-bottom:26px;max-width:560px}
-  .feat-tags{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:34px}
-  .feat-tags span{
-    font-size:.82rem;padding:6px 16px;border-radius:100px;
-    border:1px solid var(--line);color:var(--muted);background:rgba(255,255,255,.02);
-    transition:all .3s;
-  }
-  .feat-tags span:hover{color:var(--amber-soft);border-color:rgba(238,176,84,.5);transform:translateY(-2px)}
-
-  .metro-card{
-    background:linear-gradient(165deg,#2c2148,#1c1432);
-    border:1px solid var(--line);border-radius:22px;padding:34px 28px;
-    box-shadow:var(--shadow);text-align:center;position:relative;
-  }
-  .metro-card.flash{box-shadow:0 0 0 2px rgba(238,176,84,.45), var(--shadow)}
-  .metro-stage{height:210px;position:relative;display:flex;justify-content:center;align-items:flex-end;margin-bottom:8px}
-  .metro-body{
-    width:150px;height:185px;
-    background:linear-gradient(170deg,#3a2c5e,#241a3e);
-    clip-path:polygon(30% 0, 70% 0, 100% 100%, 0 100%);
-    border-radius:6px;position:absolute;bottom:14px;
-    box-shadow:inset 0 12px 24px rgba(255,255,255,.06);
-  }
-  .metro-body::after{
-    content:"";position:absolute;bottom:0;left:0;right:0;height:14px;background:rgba(238,176,84,.25);
-  }
-  .metro-rod{
-    position:absolute;bottom:22px;width:6px;height:165px;border-radius:4px;
-    background:linear-gradient(to top,#d9a45b,#f6cd8a);
-    transform-origin:bottom center;transform:rotate(0deg);
-    box-shadow:0 0 14px rgba(238,176,84,.35);
-  }
-  .metro-weight{
-    position:absolute;top:34%;left:50%;transform:translateX(-50%);
-    width:30px;height:22px;border-radius:5px;
-    background:linear-gradient(145deg,#f6cd8a,#cf9440);
-    box-shadow:0 4px 10px rgba(0,0,0,.4);
-  }
-  .beat-dots{display:flex;justify-content:center;gap:10px;margin:10px 0 20px;direction:ltr}
-  .beat-dots i{width:11px;height:11px;border-radius:50%;background:rgba(244,236,221,.15);transition:all .12s}
-  .beat-dots i.on{background:var(--amber);box-shadow:0 0 12px var(--amber);transform:scale(1.25)}
-  .bpm-row{display:flex;align-items:center;gap:14px;margin-bottom:20px}
-  .bpm-val{
-    font-family:"Lalezar",cursive;font-size:2.2rem;color:var(--amber);
-    min-width:86px;line-height:1;
-  }
-  .bpm-val small{font-size:.85rem;color:var(--muted);font-family:"Vazirmatn"}
-  input[type=range]{
-    flex:1;appearance:none;-webkit-appearance:none;height:6px;border-radius:100px;
-    background:linear-gradient(to left, var(--amber) var(--fill,40%), rgba(244,236,221,.15) var(--fill,40%));
-    outline:none;cursor:pointer;direction:ltr;
-  }
-  input[type=range]::-webkit-slider-thumb{
-    appearance:none;-webkit-appearance:none;width:22px;height:22px;border-radius:50%;
-    background:var(--amber-soft);border:3px solid #241a3e;box-shadow:0 2px 8px rgba(0,0,0,.5);
-    transition:transform .2s;
-  }
-  input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
-  input[type=range]::-moz-range-thumb{
-    width:18px;height:18px;border-radius:50%;background:var(--amber-soft);border:3px solid #241a3e;
-  }
-  .metro-ctrl{display:flex;justify-content:center;align-items:center;gap:14px}
-  .btn-play{
-    font-family:"Vazirmatn";font-size:1rem;font-weight:700;cursor:pointer;
-    background:var(--amber);color:#241505;border:none;border-radius:100px;
-    padding:12px 38px;transition:all .25s;display:inline-flex;align-items:center;gap:10px;
-  }
-  .btn-play:hover{background:var(--amber-soft);transform:translateY(-2px);box-shadow:0 10px 24px rgba(238,176,84,.3)}
-  .btn-play:active{transform:translateY(0)}
-  .sound-toggle{
-    display:inline-flex;align-items:center;gap:8px;cursor:pointer;
-    font-size:.85rem;color:var(--muted);user-select:none;
-  }
-  .sound-toggle input{display:none}
-  .sound-toggle .sw{
-    width:40px;height:22px;border-radius:100px;background:rgba(244,236,221,.15);
-    position:relative;transition:background .3s;flex-shrink:0;
-  }
-  .sound-toggle .sw::after{
-    content:"";position:absolute;top:3px;right:3px;width:16px;height:16px;border-radius:50%;
-    background:var(--ink);transition:transform .3s;
-  }
-  .sound-toggle input:checked + .sw{background:var(--amber)}
-  .sound-toggle input:checked + .sw::after{transform:translateX(-18px);background:#241505}
-  .tempo-label{margin-top:16px;font-size:.85rem;color:var(--muted)}
-  .tempo-label b{color:var(--amber-soft);font-weight:500}
-  .offline-note{
-    margin-top:22px;font-size:.82rem;color:var(--ok);
-    display:flex;align-items:center;justify-content:center;gap:8px;
-  }
-
-  /* ---------- social ---------- */
-  .social{max-width:1080px;margin:0 auto;padding:96px 24px 70px;text-align:center}
-  .social .sec-num{margin-bottom:6px}
-  .social h2{font-family:"Lalezar",cursive;font-weight:400;font-size:clamp(1.9rem,4vw,2.7rem);margin-bottom:14px}
-  .social .sub{color:var(--muted);max-width:560px;margin:0 auto 44px;line-height:2.1}
-  .social-row{display:flex;justify-content:center;gap:22px;flex-wrap:wrap}
-  .soc-card{
-    display:flex;flex-direction:column;align-items:center;gap:10px;
-    text-decoration:none;color:var(--ink);
-    width:270px;padding:34px 26px;border-radius:18px;
-    background:var(--bg-2);border:1px solid var(--line);
-    transition:transform .35s cubic-bezier(.2,.7,.2,1), border-color .35s, box-shadow .35s;
-    position:relative;overflow:hidden;
-  }
-  .soc-card::before{
-    content:"";position:absolute;inset:0;opacity:0;transition:opacity .4s;
-    background:radial-gradient(circle at 50% 0%, rgba(238,176,84,.16), transparent 70%);
-  }
-  .soc-card:hover{transform:translateY(-8px) rotate(-.5deg);box-shadow:var(--shadow)}
-  .soc-card:hover::before{opacity:1}
-  .soc-card.insta:hover{border-color:rgba(226,114,166,.55)}
-  .soc-card.tg:hover{border-color:rgba(126,196,230,.55)}
-  .soc-icon{width:58px;height:58px;border-radius:16px;display:grid;place-items:center;margin-bottom:6px}
-  .soc-card.insta .soc-icon{background:linear-gradient(140deg,#e2727e,#b05aa8)}
-  .soc-card.tg .soc-icon{background:linear-gradient(140deg,#5fb6de,#3f7fd1)}
-  .soc-icon svg{width:28px;height:28px;stroke:#fff;fill:none;stroke-width:1.8}
-  .soc-card b{font-size:1.05rem}
-  .soc-card .handle{font-family:"Lalezar",cursive;font-size:1.5rem;color:var(--amber);letter-spacing:1px;direction:ltr}
-  .soc-card .go{font-size:.8rem;color:var(--muted);transition:color .3s}
-  .soc-card:hover .go{color:var(--amber-soft)}
-  .social-line{margin-top:40px;color:var(--muted);font-size:.95rem}
-  .social-line b{color:var(--amber);font-family:"Lalezar",cursive;letter-spacing:1px;font-weight:400}
-
-  /* ---------- footer ---------- */
-  footer{
-    border-top:1px solid var(--line);padding:34px 24px;text-align:center;
-    color:var(--muted);font-size:.85rem;
-  }
-  footer .heart{color:var(--amber)}
-  footer .f-word{font-family:"Lalezar",cursive;color:var(--ink);font-size:1.1rem;letter-spacing:1px}
-
-  /* ---------- responsive ---------- */
-  @media (max-width:900px){
-    .clauses-grid{grid-template-columns:1fr;gap:34px}
-    .clauses-side{position:static}
-    .demo-inner{grid-template-columns:1fr;gap:40px}
-    .demo-inner .demo-copy{order:1}
-    .metro-card{order:2;max-width:420px;margin:0 auto;width:100%}
-  }
-  @media (max-width:520px){
-    .clause-head{flex-wrap:wrap}
-    .badge{padding:10px 16px;font-size:.9rem}
-  }
-
-  /* ---------- reduced motion ---------- */
-  @media (prefers-reduced-motion: reduce){
-    *,*::before,*::after{animation:none !important;transition:none !important}
-    .rv{opacity:1;transform:none}
-    .mask > span{transform:none}
-    .badge .strike::after{width:106%}
-    html{scroll-behavior:auto}
-  }
+/* toast */
+#toast{position:fixed;bottom:28px;left:50%;transform:translate(-50%,80px);background:var(--grad);color:#081018;font-weight:700;border-radius:14px;padding:12px 26px;z-index:99;transition:.4s;opacity:0}
+#toast.show{transform:translate(-50%,0);opacity:1}
 </style>
 </head>
 <body>
 
-  <!-- ambience -->
-  <div class="noise" aria-hidden="true"></div>
-  <div class="staff-bg" aria-hidden="true">
-    <div class="staff-group"></div><div class="staff-group"></div>
-    <div class="staff-group"></div><div class="staff-group"></div>
+<!-- hidden svg defs: avatar + logo -->
+<svg style="display:none" aria-hidden="true">
+  <defs>
+    <linearGradient id="gBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#14342b"/><stop offset="1" stop-color="#0b1220"/>
+    </linearGradient>
+    <linearGradient id="gHood" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d6dbe1"/><stop offset="1" stop-color="#9aa1a9"/>
+    </linearGradient>
+    <linearGradient id="gDenim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3f74ad"/><stop offset="1" stop-color="#274b74"/>
+    </linearGradient>
+    <linearGradient id="gLogo" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#8b5cf6"/><stop offset="1" stop-color="#f472b6"/>
+    </linearGradient>
+  </defs>
+
+  <symbol id="avatar" viewBox="0 0 240 240">
+    <circle cx="120" cy="120" r="120" fill="url(#gBg)"/>
+    <g opacity=".3" fill="#2f4f42">
+      <rect x="26" y="30" width="8" height="110" rx="4"/>
+      <rect x="52" y="16" width="6" height="120" rx="3"/>
+      <rect x="188" y="24" width="8" height="116" rx="4"/>
+      <rect x="210" y="40" width="6" height="100" rx="3"/>
+    </g>
+    <path d="M14 196 q106 -44 212 0 v44 h-212 z" fill="#0a0d14"/>
+    <circle cx="62" cy="196" r="7" fill="#e8fbff" opacity=".9"/>
+    <circle cx="86" cy="192" r="7" fill="#e8fbff" opacity=".9"/>
+    <ellipse cx="120" cy="120" rx="36" ry="17" fill="#aeb6bf"/>
+    <rect x="110" y="94" width="20" height="22" rx="8" fill="#c98e63"/>
+    <path d="M74 196 Q78 136 120 136 Q162 136 166 196 Z" fill="url(#gHood)"/>
+    <path d="M74 196 Q78 140 106 137 L98 196 Z" fill="url(#gDenim)"/>
+    <path d="M166 196 Q162 140 134 137 L142 196 Z" fill="url(#gDenim)"/>
+    <path d="M106 137 l10 12 l-14 4 z" fill="#274b74"/>
+    <path d="M134 137 l-10 12 l14 4 z" fill="#274b74"/>
+    <line x1="112" y1="146" x2="110" y2="162" stroke="#f5f7fa" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="128" y1="146" x2="130" y2="162" stroke="#f5f7fa" stroke-width="2.5" stroke-linecap="round"/>
+    <ellipse cx="120" cy="76" rx="27" ry="29" fill="#d9a06b"/>
+    <path d="M93 68 Q99 42 120 42 Q141 42 147 68 Q134 54 120 54 Q106 54 93 68 Z" fill="#201a15"/>
+    <path d="M95 80 Q97 112 120 112 Q143 112 145 80 Q140 100 120 100 Q100 100 95 80 Z" fill="#262019"/>
+    <path d="M111 91 q9 7 18 0 q-4 9 -9 9 q-5 0 -9 -9 z" fill="#262019"/>
+    <g fill="#12141c">
+      <circle cx="108" cy="74" r="8.5"/>
+      <circle cx="132" cy="74" r="8.5"/>
+      <rect x="114" y="72" width="12" height="3" rx="1.5"/>
+      <rect x="93" y="72" width="8" height="3" rx="1.5"/>
+      <rect x="139" y="72" width="8" height="3" rx="1.5"/>
+    </g>
+    <rect x="80" y="152" width="80" height="17" rx="8.5" fill="#cfd4da" transform="rotate(7 120 160)"/>
+    <rect x="80" y="162" width="80" height="17" rx="8.5" fill="#b7bdc6" transform="rotate(-7 120 170)"/>
+    <circle cx="88" cy="170" r="7" fill="#d9a06b"/>
+    <circle cx="152" cy="163" r="7" fill="#d9a06b"/>
+  </symbol>
+
+  <symbol id="logoNote" viewBox="0 0 64 64">
+    <rect width="64" height="64" rx="16" fill="url(#gLogo)"/>
+    <circle cx="26" cy="42" r="7.5" fill="#fff"/>
+    <rect x="30.5" y="15" width="3.5" height="27" rx="1.75" fill="#fff"/>
+    <path d="M34 15 q12 4 9 16 q-2 -8 -9 -10 z" fill="#fff"/>
+  </symbol>
+</svg>
+
+<canvas id="bg"></canvas>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#home">
+      <span class="ava"><svg><use href="#avatar"/></svg></span>
+      <span><b dir="ltr">Delody</b><small>دلدار • کد و ملودی</small></span>
+    </a>
+    <nav class="links">
+      <a href="#home">خانه</a>
+      <a href="#play">پیانو</a>
+      <a href="#story">داستان من</a>
+      <a href="#delody">Delody</a>
+    </nav>
+    <a class="btn btn-primary cta" href="#contact" style="padding:10px 22px">ارتباط با من</a>
   </div>
-  <div class="float-notes" aria-hidden="true">
-    <span>♪</span><span>♫</span><span>♩</span><span>♪</span><span>♬</span><span>♫</span>
+</header>
+
+<!-- ================= HERO ================= -->
+<div class="hero wrap" id="home">
+  <div class="hero-grid">
+    <div>
+      <span class="eyebrow"><span class="dot"></span> MrDeldar • برنامه‌نویس و موسیقی‌دان</span>
+      <h1>جایی که <span class="grad">کد و ملودی</span><br>به هم می‌رسند 🎧</h1>
+      <p class="lead">من «دلدار» هستم؛ برنامه‌نویس تازه‌کار و عاشقِ موسیقی. از دلِ آکورد‌های باره‌دار و جست‌وجوی گامِ آهنگ‌ها، ایده‌ای جوانه زد که اسمش شد <b dir="ltr" style="color:var(--cyan)">Delody</b> — هم‌راهِ هر نوازنده.</p>
+      <div class="chips">
+        <span class="chip">🎸 گیتار</span>
+        <span class="chip">🎹 پیانو</span>
+        <span class="chip">🎼 ملودیکا</span>
+        <span class="chip">🎤 خوانندگی</span>
+      </div>
+      <div class="hero-actions">
+        <a href="#delody" class="btn btn-primary">آشنایی با Delody 🚀</a>
+        <a href="#story" class="btn btn-ghost">داستان من 📖</a>
+        <div class="eq" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+      </div>
+    </div>
+    <div class="vinyl-zone">
+      <span class="float-note fn1">♪</span>
+      <span class="float-note fn2">♫</span>
+      <span class="float-note fn3">♬</span>
+      <div class="vinyl"><div class="label"><svg><use href="#avatar"/></svg></div></div>
+    </div>
   </div>
+</div>
 
-  <!-- top bar -->
-  <header class="top">
-    <div class="logo-mark" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#eeb054" stroke-width="1.6" stroke-linecap="round">
-        <path d="M9 18V5l10-2v13"/>
-        <circle cx="6.5" cy="18" r="2.5" fill="#eeb054" stroke="none"/>
-        <circle cx="16.5" cy="16" r="2.5" fill="#eeb054" stroke="none"/>
-      </svg>
+<!-- ================= PIANO ================= -->
+<section id="play">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="tag">♩ ♪ ♫</span>
+      <h2>یک ملودی <span class="grad">بنواز!</span></h2>
+      <p>این صفحه فقط یک وب‌سایت نیست؛ یک ساز هم هست. روی کلاویه‌ها کلیک کن یا با کیبورد بنواز.</p>
     </div>
-    <span class="logo-word"><em>Delody</em></span>
-    <span class="chip"><span class="dot"></span> سند رسمی حریم خصوصی</span>
-    <div class="spacer"></div>
-    <span class="chip gold">نسخه‌ی ۱٫۰</span>
-  </header>
-
-  <main>
-    <!-- ================= hero ================= -->
-    <section class="hero">
-      <p class="kicker">برنامه‌ی موسیقی دلودی · بیانیه‌ی رسمی</p>
-      <h1 class="title" id="decodeTitle" aria-label="سیاست حریم خصوصی برنامه ی Delody">
-        <span class="mask"><span id="decodeLine">سیاست حریم خصوصی برنامه‌ی <span class="latin">Delody</span></span></span>
-      </h1>
-      <p class="statement rv">
-        <mark>Delody هیچ اطلاعات شخصی (نام، ایمیل، شماره تلفن) از کاربر جمع‌آوری نمی‌کند.</mark>
-      </p>
-      <p class="hero-note rv d1">
-        موسیقی شما، روی دستگاه شما می‌ماند. این سند به‌صورت شفاف توضیح می‌دهد که دلودی با داده‌های شما چه رفتاری دارد — یا دقیق‌تر بگوییم، چه رفتاری <b>ندارد</b>.
-      </p>
-      <div class="badges">
-        <div class="badge rv d1"><span class="x">✕</span><span class="strike">نام</span></div>
-        <div class="badge rv d2"><span class="x">✕</span><span class="strike">ایمیل</span></div>
-        <div class="badge rv d3"><span class="x">✕</span><span class="strike">شماره تلفن</span></div>
+    <div class="piano-box reveal">
+      <div class="piano" id="piano" dir="ltr" aria-label="پیانو مجازی">
+        <div class="key white" data-freq="261.63" data-k="a"><i>C</i></div>
+        <div class="key black" data-freq="277.18" data-k="w" style="left:calc(12.5% - 3.6%)"></div>
+        <div class="key white" data-freq="293.66" data-k="s"><i>D</i></div>
+        <div class="key black" data-freq="311.13" data-k="e" style="left:calc(25% - 3.6%)"></div>
+        <div class="key white" data-freq="329.63" data-k="d"><i>E</i></div>
+        <div class="key white" data-freq="349.23" data-k="f"><i>F</i></div>
+        <div class="key black" data-freq="369.99" data-k="t" style="left:calc(50% - 3.6%)"></div>
+        <div class="key white" data-freq="392.00" data-k="g"><i>G</i></div>
+        <div class="key black" data-freq="415.30" data-k="y" style="left:calc(62.5% - 3.6%)"></div>
+        <div class="key white" data-freq="440.00" data-k="h"><i>A</i></div>
+        <div class="key black" data-freq="466.16" data-k="j" style="left:calc(75% - 3.6%)"></div>
+        <div class="key white" data-freq="493.88" data-k="k"><i>B</i></div>
+        <div class="key white" data-freq="523.25" data-k="l"><i>C</i></div>
       </div>
-    </section>
-
-    <!-- marquee -->
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee-track" id="marqueeTrack">
-        <span>بدون جمع‌آوری اطلاعات شخصی</span>
-        <span>بدون ارسال داده به سرور</span>
-        <span>بدون نیاز به اینترنت</span>
-        <span>ذخیره فقط روی دستگاه شما</span>
+      <p class="piano-hint">🎹 با کیبورد هم می‌توانی بنوازی: <span dir="ltr">A W S E D F T G Y H J K L</span></p>
+      <div class="piano-actions">
+        <button class="btn btn-primary" id="playMelody">▶ پخش یک ملودی</button>
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- ================= clauses ================= -->
-    <section class="clauses">
-      <div class="clauses-grid">
-        <aside class="clauses-side">
-          <span class="sec-num rv">۰۱ — ۰۳</span>
-          <h2 class="rv d1">سه اصلِ ساده،<br>یک قولِ محکم</h2>
-          <p class="rv d2">
-            دلودی برای خوانندگان و نوازندگان ساخته شده است؛ نه برای جمع‌آوری داده.
-            همه‌چیز — از متن آهنگ‌ها تا کتابخانه‌ی شما — در همین سه بند خلاصه می‌شود.
-          </p>
-          <span class="side-clef" aria-hidden="true">𝄞</span>
-        </aside>
+<!-- ================= STORY ================= -->
+<section id="story">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="tag">داستان من</span>
+      <h2>از <span class="grad">آکورد باره‌دار</span> تا اپلیکیشن</h2>
+      <p>مسیری که از سیم‌های گیتار شروع شد و به خط‌های کد رسید.</p>
+    </div>
 
-        <div class="clause-list">
-          <article class="clause rv">
-            <div class="clause-head">
-              <span class="clause-no">۰۱</span>
-              <h3>ذخیره‌سازی محلی <small>Local-only storage</small></h3>
-              <span class="icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="7" y="2.5" width="10" height="19" rx="2.5"/>
-                  <path d="M11 18.5h2"/>
-                  <path d="M11 8v5"/><circle cx="10" cy="13" r="1.4" fill="#8f7ad1" stroke="none"/>
-                </svg>
-              </span>
-            </div>
-            <p>داده‌های شما (متن آهنگ‌ها و کتابخانه) فقط روی دستگاه خودتان ذخیره می‌شود.</p>
-            <span class="clause-tag">۱۰۰٪ آفلاین</span>
-          </article>
-
-          <article class="clause rv d1">
-            <div class="clause-head">
-              <span class="clause-no">۰۲</span>
-              <h3>بدون سرور <small>No server, no tracking</small></h3>
-              <span class="icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="3.5" y="4" width="17" height="6" rx="1.5"/>
-                  <rect x="3.5" y="14" width="17" height="6" rx="1.5"/>
-                  <path d="M7 7h.01M7 17h.01"/>
-                  <path d="M3 21 21 3" stroke="#e2726e"/>
-                </svg>
-              </span>
-            </div>
-            <p>هیچ اطلاعاتی به سرور ارسال نمی‌شود.</p>
-            <span class="clause-tag">صفر بایت ارسالی</span>
-          </article>
-
-          <article class="clause rv d2">
-            <div class="clause-head">
-              <span class="clause-no">۰۳</span>
-              <h3>بدون نیاز به اینترنت <small>Fully offline tools</small></h3>
-              <span class="icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M2.5 9a13 13 0 0 1 19 0"/>
-                  <path d="M6 12.5a8.5 8.5 0 0 1 12 0"/>
-                  <path d="M9.5 16a4.5 4.5 0 0 1 5 0"/>
-                  <circle cx="12" cy="19" r="1.2" fill="#8f7ad1" stroke="none"/>
-                  <path d="M3 21 21 3" stroke="#e2726e"/>
-                </svg>
-              </span>
-            </div>
-            <p>برای استفاده از امکانات برنامه (مثل مترونوم و ترنسپوزر) نیازی به اینترنت نیست.</p>
-            <span class="clause-tag">همه‌جا، حتی بدون آنتن</span>
-          </article>
-        </div>
+    <div class="timeline">
+      <div class="t-item reveal">
+        <div class="t-icon">🌱</div>
+        <div class="t-card"><h3>شروع <em>برنامه‌نویسی</em></h3>
+        <p>تازه برنامه‌نویسی رو شروع کردم و در ابتدای استارت کارم هستم؛ هم‌زمان عاشق نوازندگی سازهای گیتار، پیانو و ملودیکا بودم و هستم.</p></div>
       </div>
-    </section>
-
-    <!-- ================= metronome demo ================= -->
-    <section class="demo">
-      <div class="demo-inner">
-        <div class="demo-copy">
-          <span class="sec-num rv">آزمایش زنده</span>
-          <h2 class="rv d1">مترونوم دلودی؛ همین‌جا، <em>بدون اینترنت</em></h2>
-          <p class="desc rv d2">
-            برای اینکه قول‌مان فقط روی کاغذ نباشد، یکی از امکانات برنامه را همین‌جا گذاشته‌ایم.
-            اینترنت‌تان را قطع کنید و دوباره امتحان کنید — این مترونوم مثل خودِ برنامه،
-            کاملاً بدون اتصال کار می‌کند.
-          </p>
-          <div class="feat-tags rv d2">
-            <span>♩ مترونوم</span>
-            <span>𝄐 ترنسپوزر</span>
-            <span>♪ کتابخانه‌ی آهنگ‌ها</span>
-            <span>✎ متن آهنگ</span>
-          </div>
-        </div>
-
-        <div class="metro-card rv d1" id="metroCard">
-          <div class="metro-stage" aria-hidden="true">
-            <div class="metro-body"></div>
-            <div class="metro-rod" id="metroRod"><div class="metro-weight"></div></div>
-          </div>
-          <div class="beat-dots" aria-hidden="true">
-            <i></i><i></i><i></i><i></i>
-          </div>
-          <div class="bpm-row">
-            <span class="bpm-val"><span id="bpmVal">۹۶</span> <small>BPM</small></span>
-            <input type="range" id="bpmSlider" min="40" max="208" value="96" step="1" aria-label="تنظیم سرعت مترونوم">
-          </div>
-          <div class="metro-ctrl">
-            <button class="btn-play" id="playBtn">▶ شروع</button>
-            <label class="sound-toggle">
-              <input type="checkbox" id="soundChk" checked>
-              <span class="sw"></span>
-              صدا
-            </label>
-          </div>
-          <p class="tempo-label">سرعت فعلی: <b id="tempoName">آندانته (روان)</b></p>
-          <p class="offline-note"><span class="dot" style="width:7px;height:7px;border-radius:50%;background:var(--ok);display:inline-block"></span> این دمو بدون هیچ اتصالی به سرور اجرا می‌شود</p>
-        </div>
+      <div class="t-item reveal">
+        <div class="t-icon">🧗</div>
+        <div class="t-card"><h3>چالشِ <em>آکوردها</em></h3>
+        <p>در ابتدای نوازندگی و خوانندگی با گیتار، مشکلات فراوانی در گرفتن آکوردهای باره‌دار داشتم؛ پیدا کردن آکورد آهنگ‌ها و گام مورد نظر برای خواندن هم دشوار بود.</p></div>
       </div>
-    </section>
-
-    <!-- ================= social ================= -->
-    <section class="social">
-      <span class="sec-num rv">ارتباط با ما</span>
-      <h2 class="rv d1">همراه دلودی باشید</h2>
-      <p class="sub rv d2">
-        سؤال، پیشنهاد یا بازخوردی درباره‌ی حریم خصوصی یا خودِ برنامه دارید؟
-        از راه‌های زیر در ارتباط باشید.
-      </p>
-      <div class="social-row">
-        <a class="soc-card insta rv d1" href="https://instagram.com/MrDeldar" target="_blank" rel="noopener">
-          <span class="soc-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="#fff" stroke="none"/></svg>
-          </span>
-          <b>اینستاگرام</b>
-          <span class="handle">MrDeldar</span>
-          <span class="go">مشاهده‌ی پروفایل ←</span>
-        </a>
-        <a class="soc-card tg rv d2" href="https://t.me/MrDeldar" target="_blank" rel="noopener">
-          <span class="soc-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M21 4.5 3.6 11.2c-1 .4-.9 1.4 0 1.7l4.5 1.4 1.7 5.2c.3.8 1.2.9 1.7.3l2.4-2.5 4.6 3.3c.7.5 1.6.1 1.8-.8l2.4-14c.2-1-.8-1.7-1.7-1.3Z" stroke-linejoin="round"/><path d="m8.1 14.3 9.5-7.4"/></svg>
-          </span>
-          <b>تلگرام</b>
-          <span class="handle">MrDeldar</span>
-          <span class="go">ارسال پیام ←</span>
-        </a>
+      <div class="t-item reveal">
+        <div class="t-icon">💡</div>
+        <div class="t-card"><h3>جرقهٔ <em>ایده</em></h3>
+        <p>به فکر ساخت برنامه‌ای در همین زمینه افتادم؛ ابزاری که دغدغهٔ هر نوازنده و خواننده‌ای را حل کند.</p></div>
       </div>
-      <p class="social-line rv d2">اینستاگرام و تلگرام : <b>MrDeldar</b></p>
-    </section>
-  </main>
+      <div class="t-item reveal">
+        <div class="t-icon">🚀</div>
+        <div class="t-card"><h3>تولد <em dir="ltr">Delody</em></h3>
+        <p>برنامه‌ای که به‌زودی در مارکت‌های ایرانی و خارجی قابل دسترسی خواهد بود.</p></div>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-icon">🎨</div>
+        <div class="t-card"><h3>و هنوز <em>ادامه دارد…</em></h3>
+        <p>از آنجا که به باقی زمینه‌های هنر علاقه‌مندم، ایده‌های دیگری نیز در سر دارم که در آینده به آن‌ها می‌پردازم.</p></div>
+      </div>
+    </div>
 
-  <footer>
-    <p class="f-word">Delody <span class="heart">♪</span></p>
-    <p>موسیقیِ شما، حریمِ شما — ساخته‌شده با عشق برای نوازندگان</p>
-  </footer>
+    <div class="letter reveal">
+      <h3>نامه‌ای از من ✍️</h3>
+      <p>تازه برنامه‌نویسی رو شروع کردم و در ابتدای استارت کارم به دلیل اینکه علاقه به نوازندگی سازهای گیتار و پیانو و ملودیکا داشتم و دارم و نیز در ابتدای نوازندگی و خوانندگی با گیتار دچار مشکلات فراوان در گرفتن آکوردهای باره‌دار داشتم و پیدا کردن آکورد آهنگ‌ها و گام مورد نظر برای خواندن نیز دشوار بوده، به فکر ساخت برنامه‌ای در این خصوص افتادم که به‌زودی در مارکت‌های ایرانی و خارجی قابل دسترسی خواهد بود. از آنجا که علاقه‌مند به باقی زمینه‌های هنر هستم، ایده‌های دیگری نیز در سر دارم که در آینده به آن می‌پردازم.</p>
+      <p>تصمیم گرفتم اسم برنامه‌ای که ساختم، به دلیل فعالیت در زمینهٔ موسیقی و همینطور نام خانوادگی خودم که دلدار می‌باشد، آن را <b dir="ltr" style="color:var(--cyan)">Delody</b> بنامم. امیدوارم مورد پسند و کارآمد باشد.<br>جهت ارتباط با اینجانب در فضای مجازی نظیر اینستاگرام و تلگرام، آی‌دی <b dir="ltr" style="color:var(--pink)">MrDeldar</b> را سرچ کنید.</p>
+      <div class="sign">— دلدار</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DELODY ================= -->
+<section id="delody">
+  <div class="wrap">
+    <div class="delody-card reveal">
+      <svg class="d-logo"><use href="#logoNote"/></svg>
+      <div class="d-word" dir="ltr">Delody</div>
+      <div class="formula">
+        <span class="f-box">Melody 🎵</span>
+        <span class="f-op">+</span>
+        <span class="f-box">دلدار ❤️</span>
+        <span class="f-op">=</span>
+        <span class="f-box res" dir="ltr">Delody</span>
+      </div>
+      <p style="color:var(--muted);max-width:52ch;margin:0 auto">به دلیل فعالیت در زمینهٔ موسیقی و نام خانوادگی‌ام «دلدار»، اسم برنامه‌ام را Delody گذاشتم؛ ترکیبی از ملودی و دلدار. امیدوارم مورد پسند و کارآمد باشد.</p>
+      <br>
+      <span class="badge-soon"><span class="dot"></span> به‌زودی در مارکت‌های ایرانی و خارجی</span>
+      <div class="features">
+        <div class="feat"><div class="ic">🎸</div><h4>راهنمای آکوردهای باره‌دار</h4><p>گذر آسان از سخت‌ترین آکوردها برای نوازندگان گیتار.</p></div>
+        <div class="feat"><div class="ic">🔍</div><h4>یافتن آکورد آهنگ‌ها</h4><p>آکورد هر آهنگ را سریع پیدا کن و راحت بنواز.</p></div>
+        <div class="feat"><div class="ic">🎤</div><h4>انتخاب گام خوانندگی</h4><p>گام مناسب صدایت را پیدا کن و با لذت بخوان.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="tag">ارتباط با من</span>
+      <h2>در فضای مجازی <span class="grad">هم‌صدا شویم</span></h2>
+      <p>در اینستاگرام و تلگرام، آی‌دی زیر را سرچ کنید:</p>
+    </div>
+    <div class="contact-grid reveal">
+      <a class="c-card ig" href="https://instagram.com/MrDeldar" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.2 2.3.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1.1.4 2.3.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.9-.4 2.3-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1.1.4-2.3.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.2-2.3-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1.1-.4-2.3-.1-1.3-.1-1.7-.1-4.9s0-3.6.1-4.9c.1-1.2.2-1.9.4-2.3.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1.1-.4 2.3-.4 1.3-.1 1.7-.1 4.9-.1zM12 0C8.7 0 8.3 0 7 .1 5.8.2 4.9.4 4.1.7c-.8.3-1.5.8-2.2 1.4C1.3 2.8.8 3.5.5 4.3.2 5.1 0 6 .1 7.2 0 8.5 0 8.9 0 12.2s0 3.7.1 5c.1 1.2.3 2.1.6 2.9.3.8.8 1.5 1.4 2.2.7.7 1.4 1.1 2.2 1.4.8.3 1.7.5 2.9.6 1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.2-.1 2.1-.3 2.9-.6.8-.3 1.5-.8 2.2-1.4.7-.7 1.1-1.4 1.4-2.2.3-.8.5-1.7.6-2.9.1-1.3.1-1.7.1-5s0-3.7-.1-5c-.1-1.2-.3-2.1-.6-2.9-.3-.8-.8-1.5-1.4-2.2C21.2 1.3 20.5.8 19.7.5c-.8-.3-1.7-.5-2.9-.6C15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm7.9-10.4a1.4 1.4 0 1 1-2.9 0 1.4 1.4 0 0 1 2.9 0z"/></svg></span>
+        <span><b>اینستاگرام</b><span dir="ltr">@MrDeldar</span></span>
+      </a>
+      <a class="c-card tg" href="https://t.me/MrDeldar" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M9.04 15.51l-.38 5.36c.54 0 .78-.23 1.06-.51l2.55-2.44 5.28 3.87c.97.53 1.65.25 1.91-.9l3.48-16.3c.31-1.44-.51-2-1.46-1.65L1.06 8.82c-1.4.54-1.38 1.32-.24 1.67l5.22 1.63L18.16 4.5c.57-.37 1.08-.17.66.2L9.04 15.51z"/></svg></span>
+        <span><b>تلگرام</b><span dir="ltr">@MrDeldar</span></span>
+      </a>
+    </div>
+    <div class="id-row reveal">
+      <span class="id-pill">MrDeldar</span>
+      <button class="btn btn-ghost" id="copyId">📋 کپی آی‌دی</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    ساخته‌شده با ❤️ و 🎵 توسط <span class="grad">دلدار</span> — <span dir="ltr">Delody</span> © ۱۴۰۴
+  </div>
+</footer>
+
+<div id="toast">کپی شد ✔</div>
 
 <script>
-(function(){
-  "use strict";
-  var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  /* ---------- Persian digits ---------- */
-  function faNum(n){ return Number(n).toLocaleString("fa-IR"); }
-
-  /* ---------- scramble-decode title ---------- */
-  var decodeLine = document.getElementById("decodeLine");
-  var finalHTML = decodeLine.innerHTML;
-  var finalText = "سیاست حریم خصوصی برنامه‌ی Delody";
-  if(!reducedMotion){
-    var glyphs = "ابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهی♪♫";
-    var latin = "Delody";
-    var frame = 0, totalFrames = 46;
-    decodeLine.textContent = "";
-    var tick = setInterval(function(){
-      frame++;
-      var progress = frame / totalFrames;
-      var resolved = Math.floor(progress * finalText.length);
-      var out = "";
-      for(var i=0;i<finalText.length;i++){
-        var ch = finalText[i];
-        if(ch === " " || ch === "\u200c"){ out += ch; continue; }
-        if(i < resolved){ out += ch; }
-        else if(/[A-Za-z]/.test(ch)){ out += latin[Math.floor(Math.random()*latin.length)]; }
-        else { out += glyphs[Math.floor(Math.random()*glyphs.length)]; }
-      }
-      decodeLine.textContent = out;
-      if(frame >= totalFrames){
-        clearInterval(tick);
-        decodeLine.innerHTML = finalHTML;
-      }
-    }, 34);
-  }
-
-  /* ---------- marquee duplicate ---------- */
-  var track = document.getElementById("marqueeTrack");
-  if(track){ track.innerHTML += track.innerHTML; }
-
-  /* ---------- reveal on scroll ---------- */
-  var revealEls = document.querySelectorAll(".rv, .badge");
-  if(reducedMotion || !("IntersectionObserver" in window)){
-    revealEls.forEach(function(el){ el.classList.add("in"); });
-  } else {
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if(entry.isIntersecting){
-          entry.target.classList.add("in");
-          io.unobserve(entry.target);
-        }
-      });
-    }, {threshold:.18, rootMargin:"0px 0px -40px 0px"});
-    revealEls.forEach(function(el){ io.observe(el); });
-  }
-
-  /* ---------- metronome ---------- */
-  var rod = document.getElementById("metroRod");
-  var card = document.getElementById("metroCard");
-  var playBtn = document.getElementById("playBtn");
-  var slider = document.getElementById("bpmSlider");
-  var bpmVal = document.getElementById("bpmVal");
-  var tempoName = document.getElementById("tempoName");
-  var soundChk = document.getElementById("soundChk");
-  var dots = document.querySelectorAll(".beat-dots i");
-
-  var bpm = 96, running = false;
-  var phase = 0, lastTs = null, prevBeat = -1;
-  var audioCtx = null, rafId = null;
-  var amplitude = 26;
-
-  function tempoLabel(b){
-    if(b < 60) return "لارگو (آرام و سنگین)";
-    if(b < 76) return "آداجیو (آرام)";
-    if(b < 108) return "آندانته (روان)";
-    if(b < 120) return "مودراتو (متوسط)";
-    if(b < 156) return "آلگرو (تند)";
-    return "پرستو (خیلی تند)";
-  }
-
-  function updateSliderFill(){
-    var pct = ((bpm - 40) / (208 - 40)) * 100;
-    slider.style.setProperty("--fill", (100 - pct) + "%");
-  }
-
-  function setBpm(v){
-    bpm = Math.min(208, Math.max(40, Math.round(v)));
-    bpmVal.textContent = faNum(bpm);
-    tempoName.textContent = tempoLabel(bpm);
-    updateSliderFill();
-  }
-  slider.addEventListener("input", function(){ setBpm(this.value); });
-  setBpm(96);
-
-  function ensureAudio(){
-    if(!audioCtx){
-      var AC = window.AudioContext || window.webkitAudioContext;
-      if(AC) audioCtx = new AC();
+/* ---------- background canvas: floating notes + waves ---------- */
+var cv = document.getElementById('bg'), cx = cv.getContext('2d');
+var W, H, t = 0;
+var CHARS = ['♪','♫','♬','♩'];
+var notesArr = [];
+function resize(){ W = cv.width = innerWidth; H = cv.height = innerHeight; }
+addEventListener('resize', resize); resize();
+function makeNote(init){
+  return {
+    x: Math.random()*W,
+    y: init ? Math.random()*H : H + 40,
+    s: 14 + Math.random()*24,
+    v: .3 + Math.random()*.8,
+    ch: CHARS[(Math.random()*CHARS.length)|0],
+    h: 185 + Math.random()*115,
+    a: .08 + Math.random()*.2,
+    w: Math.random()*Math.PI*2
+  };
+}
+for (var i=0;i<26;i++) notesArr.push(makeNote(true));
+function loop(){
+  t += .016;
+  cx.clearRect(0,0,W,H);
+  for (var l=0;l<3;l++){
+    cx.beginPath();
+    for (var x=0;x<=W;x+=14){
+      var y = H*.8 + l*26 + Math.sin(x*.006 + t*(1+l*.35) + l*2)*(12+l*8);
+      x===0 ? cx.moveTo(x,y) : cx.lineTo(x,y);
     }
-    if(audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+    cx.strokeStyle = 'hsla('+(200+l*40)+',80%,65%,.05)';
+    cx.lineWidth = 2; cx.stroke();
   }
-
-  function playClick(accent){
-    if(!soundChk.checked || !audioCtx) return;
-    var t = audioCtx.currentTime;
-    var osc = audioCtx.createOscillator();
-    var gain = audioCtx.createGain();
-    osc.type = "square";
-    osc.frequency.value = accent ? 1720 : 1240;
-    gain.gain.setValueAtTime(accent ? 0.22 : 0.14, t);
-    gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.06);
-    osc.connect(gain); gain.connect(audioCtx.destination);
-    osc.start(t); osc.stop(t + 0.07);
+  for (var n of notesArr){
+    n.y -= n.v; n.x += Math.sin(t + n.w)*.3;
+    if (n.y < -40) { var f = makeNote(false); n.x=f.x; n.y=f.y; n.s=f.s; n.v=f.v; n.ch=f.ch; n.h=f.h; n.a=f.a; n.w=f.w; }
+    cx.font = n.s + 'px serif';
+    cx.fillStyle = 'hsla('+n.h+',80%,70%,'+n.a+')';
+    cx.fillText(n.ch, n.x, n.y);
   }
+  requestAnimationFrame(loop);
+}
+loop();
 
-  function markBeat(idx){
-    var pos = ((idx % 4) + 4) % 4;
-    for(var i=0;i<dots.length;i++){ dots[i].classList.toggle("on", i === pos); }
-    card.classList.add("flash");
-    setTimeout(function(){ card.classList.remove("flash"); }, 110);
-    playClick(pos === 0);
-  }
+/* ---------- reveal on scroll ---------- */
+var io = new IntersectionObserver(function(es){
+  es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+},{threshold:.15});
+document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
 
-  function loop(ts){
-    if(lastTs === null) lastTs = ts;
-    var dt = Math.min(ts - lastTs, 80);
-    lastTs = ts;
-    phase += (dt / 60000) * bpm;
-    var currentBeat = Math.floor(phase + 0.5);
-    if(currentBeat !== prevBeat){
-      prevBeat = currentBeat;
-      markBeat(currentBeat);
-    }
-    var angle = amplitude * Math.sin(Math.PI * phase);
-    rod.style.transform = "rotate(" + angle.toFixed(2) + "deg)";
-    if(running) rafId = requestAnimationFrame(loop);
-  }
-
-  function stop(){
-    running = false;
-    cancelAnimationFrame(rafId);
-    rod.style.transform = "rotate(0deg)";
-    for(var i=0;i<dots.length;i++) dots[i].classList.remove("on");
-    playBtn.textContent = "▶ شروع";
-  }
-
-  playBtn.addEventListener("click", function(){
-    if(running){ stop(); return; }
-    ensureAudio();
-    running = true;
-    phase = 0; prevBeat = -1; lastTs = null;
-    playBtn.textContent = "⏸ توقف";
-    rafId = requestAnimationFrame(loop);
+/* ---------- piano audio ---------- */
+var AC = null;
+function actx(){
+  if (!AC) AC = new (window.AudioContext || window.webkitAudioContext)();
+  if (AC.state === 'suspended') AC.resume();
+  return AC;
+}
+function tone(freq, dur){
+  dur = dur || .9;
+  var ac = actx(), now = ac.currentTime;
+  var o = ac.createOscillator(), g = ac.createGain();
+  var o2 = ac.createOscillator(), g2 = ac.createGain();
+  o.type = 'triangle'; o.frequency.value = freq;
+  o2.type = 'sine'; o2.frequency.value = freq*2;
+  g.gain.setValueAtTime(0, now);
+  g.gain.linearRampToValueAtTime(.22, now+.015);
+  g.gain.exponentialRampToValueAtTime(.0001, now+dur);
+  g2.gain.setValueAtTime(.05, now);
+  g2.gain.exponentialRampToValueAtTime(.0001, now+dur*.7);
+  o.connect(g); g.connect(ac.destination);
+  o2.connect(g2); g2.connect(ac.destination);
+  o.start(now); o2.start(now);
+  o.stop(now+dur+.05); o2.stop(now+dur+.05);
+}
+var piano = document.getElementById('piano');
+function flash(el){ el.classList.add('active'); setTimeout(function(){ el.classList.remove('active'); }, 220); }
+piano.addEventListener('pointerdown', function(ev){
+  var k = ev.target.closest('.key');
+  if (!k) return;
+  tone(parseFloat(k.dataset.freq));
+  flash(k);
+});
+var KEYMAP = {};
+document.querySelectorAll('.key').forEach(function(k){ KEYMAP[k.dataset.k] = k; });
+addEventListener('keydown', function(e){
+  if (e.repeat) return;
+  var k = KEYMAP[e.key.toLowerCase()];
+  if (k){ tone(parseFloat(k.dataset.freq)); flash(k); }
+});
+/* melody */
+var MELODY = [329.63, 392, 440, 523.25, 493.88, 440, 392, 329.63, 293.66, 329.63, 261.63];
+document.getElementById('playMelody').addEventListener('click', function(){
+  MELODY.forEach(function(f, idx){
+    setTimeout(function(){
+      tone(f, .8);
+      var el = piano.querySelector('[data-freq="'+f+'"]');
+      if (el) flash(el);
+    }, idx*320);
   });
+});
 
-  if(reducedMotion){ rod.style.transform = "rotate(0deg)"; }
-})();
+/* ---------- copy id + toast ---------- */
+var toastEl = document.getElementById('toast'), toastTm;
+function toast(msg){
+  toastEl.textContent = msg;
+  toastEl.classList.add('show');
+  clearTimeout(toastTm);
+  toastTm = setTimeout(function(){ toastEl.classList.remove('show'); }, 2200);
+}
+document.getElementById('copyId').addEventListener('click', function(){
+  if (navigator.clipboard) navigator.clipboard.writeText('MrDeldar').then(function(){ toast('آی‌دی کپی شد ✔'); });
+  else toast('MrDeldar');
+});
 </script>
 </body>
 </html>
