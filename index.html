@@ -1,589 +1,594 @@
+<!--
+  ════════════════════════════════════════════════════════════════
+  راهنمای استقرار روی گیتهاب‌پیجز (سایت شما):
+  1) این فایل را دقیقاً با نام  index.html  در ریشهٔ مخزنی که
+     سرویس mrdeldar.github.io از آن منتشر می‌شود قرار دهید
+     (اگر فایل index.html قبلی دارید، آن را جایگزین/پشتیبان‌گیری کنید).
+  2) Commit و Push کنید؛ پس از چند دقیقه هر کسی آدرس
+     https://mrdeldar.github.io  را بزند، همین صفحه برایش باز می‌شود.
+  3) لینک دانلود از بازار را در متغیر BAZAAR_URL در انتهای فایل
+     (داخل تگ <script>) مقداردهی کنید.
+  نکته: هیچ کد اجراییِ ابزار ترنسپوزر/مترونوم در این صفحه وجود ندارد؛
+  صفحه صرفاً معرفی اپلیکیشن است تا قابلیت‌های برنامه لو نرود.
+  ════════════════════════════════════════════════════════════════
+-->
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Delody | دلدار — جایی که کد و ملودی به هم می‌رسند</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/vazirmatn@latest/index.css" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/vazirmatn@latest/700.css" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/vazirmatn@latest/900.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delody | ترانسپوزر و مترونوم حرفه‌ای اندروید</title>
+<meta name="description" content="دلودی (Delody) — اپلیکیشن اندروید ترانسپوزر هوشمند آکورد، مترونوم دقیق و کتابخانه آهنگ‌ها برای نوازندگان و خوانندگان. ساخته‌شده با ❤️ توسط مهدی دلدار">
+<link rel="canonical" href="https://mrdeldar.github.io/">
+<meta property="og:title" content="Delody | ترانسپوزر و مترونوم حرفه‌ای اندروید">
+<meta property="og:description" content="همراه هر نوازنده و خواننده 🎸 ترانسپوزر هوشمند آکورد، مترونوم دقیق، تشخیص گام و کتابخانه شخصی — دانلود از کافه بازار">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fa_IR">
+<meta property="og:url" content="https://mrdeldar.github.io/">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/vazirmatn@latest/index.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/vazirmatn@latest/500.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/vazirmatn@latest/700.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/vazirmatn@latest/900.css">
 <style>
 :root{
-  --bg:#070a13;
-  --card:rgba(255,255,255,.045);
-  --line:rgba(255,255,255,.09);
-  --text:#eef1f8;
-  --muted:#9aa3b5;
-  --cyan:#22d3ee;
-  --violet:#8b5cf6;
-  --pink:#f472b6;
-  --grad:linear-gradient(120deg,var(--cyan),var(--violet) 55%,var(--pink));
+  --bg:#050505; --panel:#141414; --panel2:#1b1b1b; --border:#262626;
+  --cyan:#00e5ff; --cyan-dk:#00b8d4; --green:#0dc850; --yellow:#fcd116;
+  --blue:#2f6bff; --purple:#8e24aa; --red:#e53935; --orange:#f57c00; --pink:#ec407a;
+  --text:#f2f2f2; --muted:#9aa0a6;
 }
-*{margin:0;padding:0;box-sizing:border-box}
-html{
-  scroll-behavior:smooth;
-  scroll-padding-top:96px;
-  overflow-x:hidden;
-  scrollbar-gutter:stable; /* جلوگیری از پرش صفحه هنگام ظاهر شدن اسکرول‌بار */
-}
-body{
-  font-family:"Vazirmatn",system-ui,sans-serif;
-  background:
-    radial-gradient(900px 520px at 85% -10%, rgba(139,92,246,.16), transparent 60%),
-    radial-gradient(800px 500px at 8% 18%, rgba(34,211,238,.10), transparent 60%),
-    radial-gradient(760px 620px at 50% 110%, rgba(244,114,182,.08), transparent 60%),
-    var(--bg);
-  color:var(--text);
-  overflow-x:hidden;
-  width:100%;
-  line-height:1.9;
-  -webkit-font-smoothing:antialiased;
-}
-#bg{position:fixed;inset:0;z-index:0;pointer-events:none;width:100vw;height:100vh}
-.wrap{max-width:1120px;margin:0 auto;padding:0 24px;position:relative;z-index:1;overflow-x:hidden}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:'Vazirmatn',Tahoma,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.8}
+::selection{background:var(--cyan);color:#002}
+::-webkit-scrollbar{width:9px}
+::-webkit-scrollbar-track{background:#0a0a0a}
+::-webkit-scrollbar-thumb{background:#2b2b2b;border-radius:9px}
+::-webkit-scrollbar-thumb:hover{background:var(--cyan-dk)}
 
-/* ---------- header ---------- */
-header{
-  position:fixed;top:0;right:0;left:0;z-index:50;
-  background:rgba(7,10,19,.65);backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--line);
-}
-.nav{display:flex;align-items:center;gap:22px;height:76px}
-.logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text)}
-.logo .ava{width:44px;height:44px;border-radius:50%;overflow:hidden;border:2px solid transparent;background:var(--grad);padding:2px}
-.logo .ava svg{width:100%;height:100%;border-radius:50%;display:block}
-.logo b{font-weight:900;font-size:1.25rem;letter-spacing:.5px}
-.logo small{display:block;color:var(--muted);font-size:.7rem;margin-top:-4px}
-nav.links{margin-right:auto;display:flex;gap:6px}
-nav.links a{color:var(--muted);text-decoration:none;padding:8px 14px;border-radius:12px;font-size:.92rem;transition:.25s}
-nav.links a:hover{color:var(--text);background:rgba(255,255,255,.06)}
-.nav .cta{margin-right:0;margin-left:auto}
-nav.links + .cta{margin-right:0}
-@media(max-width:820px){nav.links{display:none}.logo{margin-right:0}.nav .cta{margin-right:auto}}
+/* ================= NAV ================= */
+nav{position:sticky;top:0;z-index:100;background:rgba(8,8,8,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1150px;margin:auto;display:flex;align-items:center;gap:18px;padding:12px 20px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:20px;color:#fff;text-decoration:none}
+.brand-ic{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#29c6f6,#0288d1);display:grid;place-items:center;font-size:18px;box-shadow:0 0 16px rgba(0,190,255,.55)}
+.nav-links{display:flex;gap:4px;margin-inline-start:auto;overflow-x:auto;scrollbar-width:none}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{color:var(--muted);text-decoration:none;padding:8px 13px;border-radius:10px;font-size:14px;font-weight:500;white-space:nowrap;transition:.25s}
+.nav-links a:hover{color:var(--cyan);background:#101c1e}
+.nav-cta{background:linear-gradient(90deg,var(--cyan),#2196f3);color:#00161a !important;font-weight:800 !important;box-shadow:0 0 18px rgba(0,229,255,.35)}
+.nav-cta:hover{box-shadow:0 0 26px rgba(0,229,255,.6) !important}
 
-/* ---------- buttons ---------- */
-.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 26px;border-radius:16px;text-decoration:none;font-weight:700;font-size:.95rem;border:none;cursor:pointer;transition:.25s;font-family:inherit}
-.btn-primary{background:var(--grad);color:#081018;box-shadow:0 10px 30px rgba(139,92,246,.35)}
-.btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(139,92,246,.5)}
-.btn-ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
-.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan);transform:translateY(-3px)}
+/* ================= LAYOUT ================= */
+section{max-width:1150px;margin:auto;padding:70px 20px}
+.sec-head{text-align:center;margin-bottom:44px}
+.sec-badge{display:inline-block;background:#0e3f46;color:#26e0e6;border:1px solid #17676d;padding:4px 16px;border-radius:999px;font-size:12px;font-weight:700;margin-bottom:12px}
+.sec-head h2{font-size:clamp(24px,4vw,36px);font-weight:900}
+.sec-head p{color:var(--muted);max-width:640px;margin:10px auto 0;font-size:15px}
+.grad{background:linear-gradient(90deg,var(--cyan),#2196f3);-webkit-background-clip:text;background-clip:text;color:transparent}
 
-/* ---------- hero ---------- */
-.hero{min-height:100svh;display:flex;align-items:center;padding:130px 0 70px}
-.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;width:100%}
-.eyebrow{display:inline-flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 18px;font-size:.82rem;color:var(--muted)}
-.eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px var(--cyan);animation:pulse 2s infinite}
-@keyframes pulse{50%{opacity:.35}}
-h1{font-size:clamp(1.9rem,4.6vw,3.3rem);font-weight:900;line-height:1.5;margin:22px 0 14px}
-h1 .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero p.lead{color:var(--muted);font-size:1.05rem;max-width:56ch}
-.chips{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 30px}
-.chip{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:.85rem;display:flex;gap:8px;align-items:center;transition:.25s}
-.chip:hover{transform:translateY(-3px);border-color:var(--violet)}
-.hero-actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+/* ================= HERO ================= */
+.hero{max-width:1150px;margin:auto;padding:70px 20px 60px;display:flex;gap:50px;align-items:center;flex-wrap:wrap;position:relative}
+.hero::before{content:'';position:absolute;inset:-100px;background:radial-gradient(circle at 75% 40%,rgba(0,229,255,.10),transparent 45%),radial-gradient(circle at 20% 70%,rgba(33,150,243,.08),transparent 40%);pointer-events:none}
+.hero-txt{flex:1 1 420px;position:relative}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:#0e3f46;color:#26e0e6;border:1px solid #17676d;padding:6px 18px;border-radius:999px;font-size:13px;font-weight:700;margin-bottom:18px;animation:pulse 2.6s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(0,229,255,.35)}50%{box-shadow:0 0 0 10px rgba(0,229,255,0)}}
+.hero h1{font-size:clamp(40px,7vw,68px);font-weight:900;line-height:1.25}
+.hero .tag{color:var(--muted);font-size:clamp(15px,2vw,18px);margin:14px 0 26px;max-width:520px}
+.hero .tag b{color:var(--cyan)}
+.btn-row{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:14px 26px;border-radius:14px;font-family:inherit;font-size:15px;font-weight:800;border:none;cursor:pointer;text-decoration:none;transition:.25s;position:relative}
+.btn:active{transform:scale(.96)}
+.btn-bazaar{background:linear-gradient(135deg,#0dc850,#0a9e41);color:#fff;box-shadow:0 8px 26px rgba(13,200,80,.35)}
+.btn-bazaar:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(13,200,80,.5)}
+.btn-ghost{background:transparent;color:var(--cyan);border:1.5px solid var(--cyan-dk)}
+.btn-ghost:hover{background:#0d2226;transform:translateY(-3px)}
+.btn-cyan{background:linear-gradient(90deg,var(--cyan),#2196f3);color:#00161a;box-shadow:0 8px 26px rgba(0,229,255,.3)}
+.btn-cyan:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,229,255,.45)}
+.hero-stats{display:flex;gap:30px;margin-top:34px;flex-wrap:wrap}
+.stat b{display:block;font-size:26px;font-weight:900;color:var(--cyan)}
+.stat span{color:var(--muted);font-size:12.5px}
+.hero-phone{flex:0 1 300px;margin-inline-start:auto;position:relative;animation:float 5.5s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-16px) rotate(1deg)}}
+.hero-phone::after{content:'';position:absolute;inset:-30px;background:radial-gradient(circle,rgba(0,229,255,.16),transparent 65%);z-index:-1;border-radius:50%}
 
-/* اکولایزر بهینه‌شده با transform به جای height */
-.eq{display:flex;gap:5px;align-items:flex-end;height:44px;margin-right:8px;transform-origin:bottom}
-.eq span{width:6px;border-radius:3px;background:var(--grad);animation:eq 1.1s ease-in-out infinite;will-change:transform;transform:scaleY(0.22)}
-.eq span:nth-child(1){animation-duration:.9s}
-.eq span:nth-child(2){animation-duration:.7s}
-.eq span:nth-child(3){animation-duration:1.05s}
-.eq span:nth-child(4){animation-duration:.8s}
-.eq span:nth-child(5){animation-duration:.95s}
-@keyframes eq{0%,100%{transform:scaleY(0.22)}50%{transform:scaleY(0.95)}}
+/* ================= PHONE MOCKUPS (فقط تصویر ثابتِ محیط برنامه) ================= */
+.phone{width:266px;background:#0b0b0b;border:1px solid #2c2c2c;border-radius:34px;padding:9px;box-shadow:0 24px 60px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.04) inset;margin:auto}
+.screen{border-radius:26px;overflow:hidden;background:#0a0a0a;border:1px solid #1d1d1d;display:flex;flex-direction:column;gap:6px;padding:8px;font-size:9px}
+.m-status{display:flex;justify-content:space-between;color:#8f9a8f;background:#2e7d32;border-radius:8px;padding:3px 9px;font-size:8px;font-weight:700}
+.m-tabs{display:flex;gap:6px;align-items:center;background:#151515;border-radius:11px;padding:6px}
+.m-burger{color:var(--cyan);font-size:14px;font-weight:900}
+.m-tab{padding:4px 9px;border-radius:8px;color:#888;white-space:nowrap}
+.m-tab.on{background:var(--cyan);color:#00222a;font-weight:800;box-shadow:0 0 12px rgba(0,229,255,.65)}
+.m-row{display:flex;gap:5px;align-items:center}
+.m-sq{border-radius:8px;padding:5px 8px;font-weight:800;color:#fff;white-space:nowrap;text-align:center}
+.m-select{background:#000;border:1px solid #333;border-radius:8px;padding:5px 8px;color:var(--cyan);flex:1;display:flex;justify-content:space-between;gap:6px;white-space:nowrap;overflow:hidden}
+.m-select.lib{border:2px solid #f6a821;color:#fff}
+.c-red{background:var(--red)}
+.c-green{background:var(--green)}
+.c-blue{background:var(--blue)}
+.c-purple{background:var(--purple)}
+.c-orange{background:var(--orange)}
+.c-gray{background:#3a3a3a}
+.m-area{background:#101010;border:1px solid #222;border-radius:10px;min-height:62px;color:#666;padding:7px}
+.m-yellow{background:var(--yellow);color:#161616;border-radius:10px;padding:6px;text-align:center;font-weight:800}
+.m-panel{background:#161616;border:1px solid #222;border-radius:11px;padding:9px;display:flex;flex-direction:column;gap:8px}
+.m-sline{display:flex;align-items:center;gap:7px;color:#bbb}
+.m-slider{height:4px;background:#3a3a3a;border-radius:3px;position:relative;flex:1}
+.m-slider i{position:absolute;right:0;top:0;height:4px;background:var(--cyan);border-radius:3px}
+.m-slider b{position:absolute;top:-4px;width:12px;height:12px;background:var(--cyan);border-radius:50%;margin-right:-6px;box-shadow:0 0 8px rgba(0,229,255,.7)}
+.m-dir{display:flex;gap:5px}
+.m-dir span{background:#3a3a3a;border-radius:7px;padding:4px 9px}
+.m-dir span.on{background:var(--cyan);color:#002}
+.m-statusbar{display:flex;justify-content:space-between;color:#9aa0a6;background:#141414;padding:4px 9px;border-radius:7px;font-size:8px}
+.m-result{background:#000;border:1px solid #1e1e1e;border-radius:10px;min-height:66px;color:#fff;text-align:center;padding:10px}
+.metro-big{font-size:46px;color:var(--cyan);text-shadow:0 0 20px rgba(0,229,255,.85);text-align:center;font-weight:900;line-height:1.2;font-family:inherit}
+.metro-sub{color:#888;text-align:center;font-size:8.5px}
+.m-dots{display:flex;gap:9px;justify-content:center;padding:4px 0}
+.m-dot{width:16px;height:16px;border-radius:50%;background:#3c3c3c;border:1px solid #555}
+.m-dot.lit{background:#8f8fa8;border-color:#bbb}
+.m-dash{border:1.5px dashed var(--cyan);border-radius:11px;color:var(--cyan);text-align:center;padding:8px;font-size:8.5px;background:rgba(0,229,255,.05)}
+.screen.about{background:linear-gradient(180deg,#10202c,#0b141d);border-color:#1d4a55;gap:7px;padding:16px 10px}
+.about-circle{width:76px;height:76px;border-radius:50%;background:linear-gradient(135deg,#29c6f6,#0288d1);display:grid;place-items:center;font-size:32px;margin:4px auto;box-shadow:0 0 26px rgba(0,190,255,.75)}
+.about-title{color:#2196f3;font-size:21px;font-weight:900;text-align:center;letter-spacing:1px}
+.about-badge{margin:2px auto;width:max-content;background:#0e3f46;color:#26e0e6;border:1px solid #17676d;padding:3px 12px;border-radius:999px;font-size:8.5px;font-weight:700}
+.about-line{border-top:1px solid #1d4a55;margin:6px 2px}
+.about-made{color:#9aa0a6;text-align:center;font-size:9px}
+.about-name{color:#fff;text-align:center;font-weight:800;font-size:12px}
+.social-row{display:flex;gap:7px}
+.social-btn{flex:1;border-radius:10px;padding:7px 4px;text-align:center;font-size:8.5px;font-weight:700;color:#eee}
+.social-btn.ig{border:1px solid var(--pink);background:#3a2733}
+.social-btn.tg{border:1px solid #2196f3;background:#173042}
+.close-pill{margin:4px auto 0;width:max-content;background:linear-gradient(90deg,var(--cyan),#2196f3);color:#00222a;padding:6px 30px;border-radius:999px;font-weight:900;box-shadow:0 0 16px rgba(0,229,255,.5)}
 
-/* vinyl بهینه‌شده */
-.vinyl-zone{display:grid;place-items:center;position:relative}
-.vinyl{position:relative;width:min(400px,78vw);aspect-ratio:1;border-radius:50%;
-  background:repeating-radial-gradient(circle at 50%, #0b0b10 0 2px, #16161f 2px 4px);
-  box-shadow:0 30px 70px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.07), 0 0 90px rgba(139,92,246,.28);
-  display:grid;place-items:center;animation:spin 24s linear infinite;will-change:transform}
-.vinyl .label{width:64%;aspect-ratio:1;border-radius:50%;overflow:hidden;border:6px solid #05050a;box-shadow:inset 0 0 0 2px rgba(255,255,255,.08)}
-.vinyl .label svg{width:100%;height:100%;display:block}
-@keyframes spin{to{transform:rotate(360deg)}}
+/* ================= FEATURES ================= */
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.feat{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:26px 22px;transition:.3s;position:relative;overflow:hidden}
+.feat::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,229,255,.07),transparent 60%);opacity:0;transition:.3s}
+.feat:hover{transform:translateY(-6px);border-color:var(--cyan-dk)}
+.feat:hover::before{opacity:1}
+.feat-ic{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;font-size:25px;margin-bottom:16px}
+.feat h3{font-size:17px;font-weight:800;margin-bottom:8px}
+.feat p{color:var(--muted);font-size:13.5px}
 
-/* نت‌های شناور بهینه‌شده */
-.float-note{position:absolute;font-size:1.6rem;animation:floaty 7s ease-in-out infinite;filter:drop-shadow(0 0 10px rgba(34,211,238,.6));will-change:transform;opacity:0.7}
-.fn1{top:6%;right:10%;color:var(--cyan)}
-.fn2{bottom:10%;right:2%;color:var(--pink);animation-delay:1.2s}
-.fn3{top:16%;left:4%;color:var(--violet);animation-delay:2.2s}
-@keyframes floaty{50%{transform:translateY(-18px) rotate(8deg)}}
+/* ================= SCREENSHOTS ================= */
+.shots{display:flex;gap:34px;justify-content:center;flex-wrap:wrap}
+.shot{text-align:center}
+.shot .phone{transition:.35s}
+.shot:hover .phone{transform:translateY(-10px) scale(1.02)}
+.shot p{margin-top:16px;color:var(--muted);font-size:14px;font-weight:700}
+.shot p b{color:var(--cyan)}
 
-@media(max-width:920px){
-  .hero-grid{grid-template-columns:1fr;gap:44px}
-  .vinyl-zone{order:-1}
-}
+/* ================= COMMENTS ================= */
+.cm-wrap{max-width:760px;margin:auto}
+.cm-form{background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:24px;margin-bottom:30px}
+.cm-form h3{font-size:17px;margin-bottom:16px}
+.cm-form .row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.cm-form input{flex:1 1 200px}
+input,textarea{font-family:inherit;background:#0d0d0d;color:var(--text);border:1.5px solid var(--border);border-radius:11px;padding:11px 14px;font-size:14px;outline:none;transition:.2s}
+input:focus,textarea:focus{border-color:var(--cyan)}
+.cm-form textarea{width:100%;min-height:96px;resize:vertical;margin-bottom:14px}
+.cm-count{color:var(--muted);font-size:13px;margin-bottom:16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.cm-count b{color:var(--cyan)}
+.cm-list{display:flex;flex-direction:column;gap:16px}
+.cm-card{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:20px;animation:fadeUp .45s}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.cm-top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.cm-av{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:17px;color:#00222a;flex-shrink:0}
+.cm-name{font-weight:800;font-size:15px}
+.cm-date{color:var(--muted);font-size:11.5px}
+.cm-text{color:#dcdcdc;font-size:14px;white-space:pre-wrap}
+.cm-foot{display:flex;justify-content:flex-end;margin-top:14px}
+.like-btn{display:inline-flex;align-items:center;gap:7px;background:var(--panel2);border:1.5px solid var(--border);color:var(--muted);border-radius:999px;padding:7px 16px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:.2s}
+.like-btn:hover{border-color:var(--pink);color:var(--pink)}
+.like-btn.liked{background:rgba(236,64,122,.14);border-color:var(--pink);color:var(--pink)}
+.like-btn .hrt{transition:.2s;display:inline-block}
+.like-btn.liked .hrt{transform:scale(1.3)}
+.cm-empty{text-align:center;color:var(--muted);padding:30px;border:1.5px dashed var(--border);border-radius:16px}
 
-/* ---------- sections ---------- */
-section{padding:96px 0;position:relative}
-.sec-head{text-align:center;margin-bottom:56px}
-.sec-head .tag{color:var(--cyan);font-size:.85rem;letter-spacing:2px}
-.sec-head h2{font-size:clamp(1.5rem,3.2vw,2.3rem);font-weight:900;margin-top:6px}
-.sec-head h2 .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-.sec-head p{color:var(--muted);max-width:60ch;margin:10px auto 0}
+/* ================= DOWNLOAD ================= */
+.dl-box{background:linear-gradient(140deg,#0e2a33,#0b1622 55%,#101c2b);border:1px solid #17676d;border-radius:26px;padding:52px 30px;text-align:center;position:relative;overflow:hidden}
+.dl-box::before{content:'♪ ♫ ♩';position:absolute;inset:0;display:flex;align-items:center;justify-content:space-around;font-size:90px;color:rgba(0,229,255,.05);pointer-events:none}
+.dl-box h2{font-size:clamp(24px,4vw,34px);font-weight:900;margin-bottom:10px;position:relative}
+.dl-box p{color:var(--muted);max-width:520px;margin:0 auto 30px;font-size:15px;position:relative}
+.dl-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative}
+.dl-note{margin-top:22px;color:var(--muted);font-size:12.5px;position:relative}
+.dl-note a{color:var(--cyan)}
 
-/* piano */
-.piano-box{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:34px;backdrop-filter:blur(8px)}
-.piano{position:relative;display:flex;height:200px;border-radius:16px;overflow:hidden;max-width:760px;margin:26px auto 0;box-shadow:0 20px 50px rgba(0,0,0,.45);touch-action:manipulation}
-.key.white{flex:1;background:linear-gradient(#f8fafc,#dbe2ea);border-left:1px solid #b9c2cd;position:relative;cursor:pointer;transition:.12s}
-.key.white:first-child{border-left:none}
-.key.white i{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);font-style:normal;color:#8a94a1;font-size:.75rem}
-.key.white.active,.key.white:active{background:linear-gradient(#a5f3fc,#c4b5fd);transform:translateY(2px)}
-.key.black{position:absolute;top:0;height:58%;width:7.2%;background:linear-gradient(#3a3f4a,#12151c);border-radius:0 0 6px 6px;z-index:2;cursor:pointer;transition:.12s;box-shadow:0 4px 10px rgba(0,0,0,.5)}
-.key.black.active,.key.black:active{background:linear-gradient(#8b5cf6,#22d3ee);transform:translateY(2px)}
-.piano-hint{text-align:center;color:var(--muted);font-size:.85rem;margin-top:16px}
-.piano-actions{display:flex;justify-content:center;margin-top:20px}
+/* ================= FAQ ================= */
+.faq{max-width:760px;margin:auto;display:flex;flex-direction:column;gap:12px}
+.faq-item{background:var(--panel);border:1px solid var(--border);border-radius:15px;overflow:hidden;transition:.25s}
+.faq-item.open{border-color:var(--cyan-dk)}
+.faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px;background:none;border:none;color:var(--text);font-family:inherit;font-size:15px;font-weight:700;padding:18px 20px;cursor:pointer;text-align:right}
+.faq-q .arw{color:var(--cyan);transition:.3s;font-size:13px;flex-shrink:0}
+.faq-item.open .arw{transform:rotate(180deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease;color:var(--muted);font-size:14px}
+.faq-a div{padding:0 20px 18px}
 
-/* timeline */
-.timeline{position:relative;max-width:820px;margin:0 auto}
-.timeline::before{content:"";position:absolute;top:0;bottom:0;right:27px;width:2px;background:linear-gradient(var(--cyan),var(--violet),var(--pink));opacity:.5}
-.t-item{display:flex;gap:24px;margin-bottom:34px;position:relative}
-.t-icon{flex:0 0 56px;height:56px;border-radius:18px;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;font-size:1.5rem;position:relative;z-index:1;box-shadow:0 0 0 6px var(--bg)}
-.t-card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 26px;flex:1;transition:.3s;backdrop-filter:blur(8px)}
-.t-card:hover{transform:translateX(-6px);border-color:rgba(34,211,238,.4)}
-.t-card h3{font-size:1.1rem;margin-bottom:6px}
-.t-card h3 em{font-style:normal;color:var(--cyan)}
-.t-card p{color:var(--muted);font-size:.95rem}
+/* ================= FOOTER ================= */
+footer{border-top:1px solid var(--border);margin-top:40px;padding:38px 20px;text-align:center}
+footer .made{color:var(--muted);font-size:14px}
+footer .made b{color:#fff}
+.f-links{display:flex;gap:20px;justify-content:center;margin:16px 0;flex-wrap:wrap}
+.f-links a{color:var(--muted);text-decoration:none;font-size:13.5px;transition:.2s}
+.f-links a:hover{color:var(--cyan)}
+.f-copy{color:#555;font-size:12px}
 
-/* letter */
-.letter{background:linear-gradient(160deg,rgba(34,211,238,.07),rgba(139,92,246,.08));border:1px solid var(--line);border-radius:26px;padding:44px;max-width:860px;margin:64px auto 0;position:relative}
-.letter::before{content:"✉️";position:absolute;top:-22px;right:36px;font-size:2rem;background:var(--bg);padding:0 12px;border-radius:12px}
-.letter h3{font-size:1.3rem;margin-bottom:18px}
-.letter p{color:#cdd4e0;margin-bottom:18px;text-align:justify}
-.letter .sign{display:flex;align-items:center;gap:12px;color:var(--cyan);font-weight:700}
-.letter .sign::before{content:"";width:44px;height:2px;background:var(--grad)}
-
-/* delody */
-.delody-card{background:var(--card);border:1px solid var(--line);border-radius:30px;padding:56px 40px;text-align:center;backdrop-filter:blur(10px);position:relative;overflow:hidden}
-.delody-card::after{content:"♪ ♫ ♬";position:absolute;left:-10px;bottom:-14px;font-size:5rem;opacity:.05;letter-spacing:10px;pointer-events:none}
-.d-logo{width:96px;height:96px;margin:0 auto 18px;filter:drop-shadow(0 12px 30px rgba(139,92,246,.5))}
-.d-word{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:900;letter-spacing:2px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-.formula{display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap;margin:28px 0}
-.f-box{background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:16px;padding:10px 26px;font-weight:700;font-size:1.1rem}
-.f-op{font-size:1.5rem;color:var(--cyan)}
-.f-box.res{background:var(--grad);color:#081018;border:none;font-weight:900}
-.badge-soon{display:inline-flex;align-items:center;gap:10px;background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.35);color:var(--cyan);border-radius:999px;padding:10px 24px;font-weight:700;margin-top:8px}
-.badge-soon .dot{width:9px;height:9px;border-radius:50%;background:var(--cyan);animation:pulse 1.6s infinite}
-.features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
-.feat{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:20px;padding:26px 20px;transition:.3s}
-.feat:hover{transform:translateY(-6px);border-color:rgba(139,92,246,.5)}
-.feat .ic{font-size:2rem;margin-bottom:10px}
-.feat h4{margin-bottom:6px}
-.feat p{color:var(--muted);font-size:.88rem}
-@media(max-width:820px){.features{grid-template-columns:1fr}}
-
-/* contact */
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:760px;margin:0 auto}
-.c-card{display:flex;align-items:center;gap:18px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px;text-decoration:none;color:var(--text);transition:.3s;backdrop-filter:blur(8px)}
-.c-card:hover{transform:translateY(-6px)}
-.c-card.ig:hover{border-color:#f472b6;box-shadow:0 16px 40px rgba(244,114,182,.2)}
-.c-card.tg:hover{border-color:#22d3ee;box-shadow:0 16px 40px rgba(34,211,238,.2)}
-.c-card .ic{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;flex:0 0 54px}
-.c-card.ig .ic{background:linear-gradient(45deg,#f9ce34,#ee2a7b,#6228d7)}
-.c-card.tg .ic{background:linear-gradient(#37bbfe,#007dbb)}
-.c-card .ic svg{width:28px;height:28px;fill:#fff}
-.c-card b{display:block;font-size:1.05rem}
-.c-card span{color:var(--muted);font-size:.85rem}
-.id-row{display:flex;justify-content:center;align-items:center;gap:14px;margin-top:34px;flex-wrap:wrap}
-.id-pill{direction:ltr;font-weight:900;font-size:1.2rem;letter-spacing:1px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 28px}
-@media(max-width:720px){.contact-grid{grid-template-columns:1fr}}
-
-footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;color:var(--muted);font-size:.88rem;position:relative;z-index:1}
-footer .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:700}
-
-/* reveal */
-.reveal{opacity:0;transform:translateY(34px);transition:opacity .8s ease,transform .8s ease}
+/* ================= MISC ================= */
+#toTop{position:fixed;left:20px;bottom:24px;width:48px;height:48px;border-radius:14px;border:none;background:linear-gradient(135deg,var(--cyan),#2196f3);color:#00222a;font-size:19px;font-weight:900;cursor:pointer;opacity:0;pointer-events:none;transition:.3s;z-index:90;box-shadow:0 8px 22px rgba(0,229,255,.35)}
+#toTop.show{opacity:1;pointer-events:auto}
+#toast{position:fixed;right:50%;transform:translateX(50%) translateY(90px);bottom:26px;background:#123a40;color:#aef4fb;border:1px solid var(--cyan-dk);border-radius:14px;padding:13px 26px;font-size:14px;font-weight:700;z-index:200;transition:.4s;opacity:0;box-shadow:0 10px 30px rgba(0,0,0,.5);max-width:90vw;text-align:center}
+#toast.show{transform:translateX(50%) translateY(0);opacity:1}
+.reveal{opacity:0;transform:translateY(28px);transition:.7s ease}
 .reveal.visible{opacity:1;transform:none}
-
-/* toast */
-#toast{position:fixed;bottom:28px;left:50%;transform:translate(-50%,80px);background:var(--grad);color:#081018;font-weight:700;border-radius:14px;padding:12px 26px;z-index:99;transition:.4s;opacity:0;pointer-events:none}
-#toast.show{transform:translate(-50%,0);opacity:1}
-
-/* ---------- بهینه‌سازی موبایل ---------- */
-@media (max-width: 768px) {
-  #bg { display: none !important; } /* غیرفعال کردن Canvas سنگین در موبایل */
-  .vinyl { animation: none !important; } /* توقف چرخش در موبایل */
-  .float-note { display: none; } /* حذف نت‌های شناور در موبایل */
-  .eq { display: none; } /* حذف اکولایزر در موبایل */
+@media(max-width:720px){
+  .hero{padding-top:44px}
+  .hero-phone{margin:0 auto}
+  section{padding:52px 16px}
+  .dl-box{padding:40px 18px}
 }
 </style>
 </head>
 <body>
 
-<!-- hidden svg defs: avatar + logo -->
-<svg style="display:none" aria-hidden="true">
-  <defs>
-    <linearGradient id="gBg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#14342b"/><stop offset="1" stop-color="#0b1220"/>
-    </linearGradient>
-    <linearGradient id="gHood" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#d6dbe1"/><stop offset="1" stop-color="#9aa1a9"/>
-    </linearGradient>
-    <linearGradient id="gDenim" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#3f74ad"/><stop offset="1" stop-color="#274b74"/>
-    </linearGradient>
-    <linearGradient id="gLogo" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#8b5cf6"/><stop offset="1" stop-color="#f472b6"/>
-    </linearGradient>
-  </defs>
-
-  <symbol id="avatar" viewBox="0 0 240 240">
-    <circle cx="120" cy="120" r="120" fill="url(#gBg)"/>
-    <g opacity=".3" fill="#2f4f42">
-      <rect x="26" y="30" width="8" height="110" rx="4"/>
-      <rect x="52" y="16" width="6" height="120" rx="3"/>
-      <rect x="188" y="24" width="8" height="116" rx="4"/>
-      <rect x="210" y="40" width="6" height="100" rx="3"/>
-    </g>
-    <path d="M14 196 q106 -44 212 0 v44 h-212 z" fill="#0a0d14"/>
-    <circle cx="62" cy="196" r="7" fill="#e8fbff" opacity=".9"/>
-    <circle cx="86" cy="192" r="7" fill="#e8fbff" opacity=".9"/>
-    <ellipse cx="120" cy="120" rx="36" ry="17" fill="#aeb6bf"/>
-    <rect x="110" y="94" width="20" height="22" rx="8" fill="#c98e63"/>
-    <path d="M74 196 Q78 136 120 136 Q162 136 166 196 Z" fill="url(#gHood)"/>
-    <path d="M74 196 Q78 140 106 137 L98 196 Z" fill="url(#gDenim)"/>
-    <path d="M166 196 Q162 140 134 137 L142 196 Z" fill="url(#gDenim)"/>
-    <path d="M106 137 l10 12 l-14 4 z" fill="#274b74"/>
-    <path d="M134 137 l-10 12 l14 4 z" fill="#274b74"/>
-    <line x1="112" y1="146" x2="110" y2="162" stroke="#f5f7fa" stroke-width="2.5" stroke-linecap="round"/>
-    <line x1="128" y1="146" x2="130" y2="162" stroke="#f5f7fa" stroke-width="2.5" stroke-linecap="round"/>
-    <ellipse cx="120" cy="76" rx="27" ry="29" fill="#d9a06b"/>
-    <path d="M93 68 Q99 42 120 42 Q141 42 147 68 Q134 54 120 54 Q106 54 93 68 Z" fill="#201a15"/>
-    <path d="M95 80 Q97 112 120 112 Q143 112 145 80 Q140 100 120 100 Q100 100 95 80 Z" fill="#262019"/>
-    <path d="M111 91 q9 7 18 0 q-4 9 -9 9 q-5 0 -9 -9 z" fill="#262019"/>
-    <g fill="#12141c">
-      <circle cx="108" cy="74" r="8.5"/>
-      <circle cx="132" cy="74" r="8.5"/>
-      <rect x="114" y="72" width="12" height="3" rx="1.5"/>
-      <rect x="93" y="72" width="8" height="3" rx="1.5"/>
-      <rect x="139" y="72" width="8" height="3" rx="1.5"/>
-    </g>
-    <rect x="80" y="152" width="80" height="17" rx="8.5" fill="#cfd4da" transform="rotate(7 120 160)"/>
-    <rect x="80" y="162" width="80" height="17" rx="8.5" fill="#b7bdc6" transform="rotate(-7 120 170)"/>
-    <circle cx="88" cy="170" r="7" fill="#d9a06b"/>
-    <circle cx="152" cy="163" r="7" fill="#d9a06b"/>
-  </symbol>
-
-  <symbol id="logoNote" viewBox="0 0 64 64">
-    <rect width="64" height="64" rx="16" fill="url(#gLogo)"/>
-    <circle cx="26" cy="42" r="7.5" fill="#fff"/>
-    <rect x="30.5" y="15" width="3.5" height="27" rx="1.75" fill="#fff"/>
-    <path d="M34 15 q12 4 9 16 q-2 -8 -9 -10 z" fill="#fff"/>
-  </symbol>
-</svg>
-
-<canvas id="bg"></canvas>
-
-<header>
-  <div class="wrap nav">
-    <a class="logo" href="#home">
-      <span class="ava"><svg><use href="#avatar"/></svg></span>
-      <span><b dir="ltr">Delody</b><small>دلدار • کد و ملودی</small></span>
-    </a>
-    <nav class="links">
-      <a href="#home">خانه</a>
-      <a href="#play">پیانو</a>
-      <a href="#story">داستان من</a>
-      <a href="#delody">Delody</a>
-    </nav>
-    <a class="btn btn-primary cta" href="#contact" style="padding:10px 22px">ارتباط با من</a>
+<!-- ================= NAV ================= -->
+<nav>
+  <div class="nav-in">
+    <a class="brand" href="#top"><span class="brand-ic">❤️</span> Delody</a>
+    <div class="nav-links">
+      <a href="#features">ویژگی‌ها</a>
+      <a href="#screens">تصاویر برنامه</a>
+      <a href="#comments">نظرات</a>
+      <a href="#faq">سؤالات متداول</a>
+      <a class="nav-cta bazaar-link" href="#">⬇ دانلود</a>
+    </div>
   </div>
-</header>
+</nav>
 
 <!-- ================= HERO ================= -->
-<div class="hero wrap" id="home">
-  <div class="hero-grid">
-    <div>
-      <span class="eyebrow"><span class="dot"></span> MrDeldar • برنامه‌نویس و موسیقی‌دان</span>
-      <h1>جایی که <span class="grad">کد و ملودی</span><br>به هم می‌رسند 🎧</h1>
-      <p class="lead">من «دلدار» هستم؛ برنامه‌نویس تازه‌کار و عاشقِ موسیقی. از دلِ آکورد‌های باره‌دار و جست‌وجوی گامِ آهنگ‌ها، ایده‌ای جوانه زد که اسمش شد <b dir="ltr" style="color:var(--cyan)">Delody</b> — هم‌راهِ هر نوازنده.</p>
-      <div class="chips">
-        <span class="chip">🎸 گیتار</span>
-        <span class="chip">🎹 پیانو</span>
-        <span class="chip">🎼 ملودیکا</span>
-        <span class="chip">🎤 خوانندگی</span>
-      </div>
-      <div class="hero-actions">
-        <a href="#delody" class="btn btn-primary">آشنایی با Delody 🚀</a>
-        <a href="#story" class="btn btn-ghost">داستان من 📖</a>
-        <div class="eq" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
-      </div>
+<header class="hero" id="top">
+  <div class="hero-txt">
+    <span class="hero-badge">🎵 نسخه 2.0 حرفه‌ای منتشر شد</span>
+    <h1>دلودی <span class="grad">Delody</span></h1>
+    <p class="tag">همراه هر نوازنده و خواننده 🎸 — <b>ترانسپوزر هوشمند آکورد</b>، <b>مترونوم دقیق</b>، تشخیص گام آهنگ و کتابخانه شخصی؛ همه در یک اپلیکیشن سبک اندرویدی.</p>
+    <div class="btn-row">
+      <a class="btn btn-bazaar bazaar-link" href="#">🛒 دانلود از بازار</a>
+      <a class="btn btn-ghost" href="#screens">📱 مشاهدهٔ محیط برنامه</a>
     </div>
-    <div class="vinyl-zone">
-      <span class="float-note fn1">♪</span>
-      <span class="float-note fn2">♫</span>
-      <span class="float-note fn3">♬</span>
-      <div class="vinyl"><div class="label"><svg><use href="#avatar"/></svg></div></div>
+    <div class="hero-stats">
+      <div class="stat"><b data-count="5000" data-suffix="+">۰</b><span>دانلود</span></div>
+      <div class="stat"><b>۴٫۸ ★</b><span>امتیاز کاربران</span></div>
+      <div class="stat"><b>۲٫۰</b><span>نسخه حرفه‌ای</span></div>
+      <div class="stat"><b>&lt;۵MB</b><span>حجم نصب</span></div>
     </div>
   </div>
-</div>
+  <div class="hero-phone" id="heroPhone"></div>
+</header>
 
-<!-- ================= PIANO ================= -->
-<section id="play">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="tag">♩ ♪ ♫</span>
-      <h2>یک ملودی <span class="grad">بنواز!</span></h2>
-      <p>این صفحه فقط یک وب‌سایت نیست؛ یک ساز هم هست. روی کلاویه‌ها کلیک کن یا با کیبورد بنواز.</p>
-    </div>
-    <div class="piano-box reveal">
-      <div class="piano" id="piano" dir="ltr" aria-label="پیانو مجازی">
-        <div class="key white" data-freq="261.63" data-k="a"><i>C</i></div>
-        <div class="key black" data-freq="277.18" data-k="w" style="left:calc(12.5% - 3.6%)"></div>
-        <div class="key white" data-freq="293.66" data-k="s"><i>D</i></div>
-        <div class="key black" data-freq="311.13" data-k="e" style="left:calc(25% - 3.6%)"></div>
-        <div class="key white" data-freq="329.63" data-k="d"><i>E</i></div>
-        <div class="key white" data-freq="349.23" data-k="f"><i>F</i></div>
-        <div class="key black" data-freq="369.99" data-k="t" style="left:calc(50% - 3.6%)"></div>
-        <div class="key white" data-freq="392.00" data-k="g"><i>G</i></div>
-        <div class="key black" data-freq="415.30" data-k="y" style="left:calc(62.5% - 3.6%)"></div>
-        <div class="key white" data-freq="440.00" data-k="h"><i>A</i></div>
-        <div class="key black" data-freq="466.16" data-k="j" style="left:calc(75% - 3.6%)"></div>
-        <div class="key white" data-freq="493.88" data-k="k"><i>B</i></div>
-        <div class="key white" data-freq="523.25" data-k="l"><i>C</i></div>
-      </div>
-      <p class="piano-hint">🎹 با کیبورد هم می‌توانی بنوازی: <span dir="ltr">A W S E D F T G Y H J K L</span></p>
-      <div class="piano-actions">
-        <button class="btn btn-primary" id="playMelody">▶ پخش یک ملودی</button>
-      </div>
-    </div>
+<!-- ================= FEATURES ================= -->
+<section id="features">
+  <div class="sec-head reveal">
+    <span class="sec-badge">✨ امکانات</span>
+    <h2>چرا <span class="grad">Delody</span>؟</h2>
+    <p>هر چیزی که برای تمرین، اجرا و تنظیم آهنگ نیاز داری؛ ساده، سریع و کاملاً فارسی. همهٔ این قابلیت‌ها فقط داخل خود اپلیکیشن کار می‌کنند.</p>
+  </div>
+  <div class="feat-grid">
+    <div class="feat reveal"><div class="feat-ic" style="background:rgba(0,229,255,.12)">🎼</div><h3>ترانسپوزر آنی آکورد</h3><p>متن و آکوردهای آهنگ را وارد کن و با یک لمس، کل آهنگ را به هر گامی که بخواهی جابه‌جا کن؛ بدون آسیب به فرمت متن.</p></div>
+    <div class="feat reveal"><div class="feat-ic" style="background:rgba(252,209,22,.12)">🔍</div><h3>تشخیص هوشمند گام</h3><p>گام مبدأ آهنگ را به‌صورت خودمند تشخیص بده تا بدون سردرگمی، ترانسپوز را از همان‌جا شروع کنی.</p></div>
+    <div class="feat reveal"><div class="feat-ic" style="background:rgba(13,200,80,.12)">⏱️</div><h3>مترونوم حرفه‌ای</h3><p>ضرب‌آهنگ قابل تنظیم از ۴۰ تا ۲۰ BPM با میزان‌های ۲/۴، /۴، ۴/۴ و ۶/۸ به‌همراه حالت Tap Tempo.</p></div>
+    <div class="feat reveal"><div class="feat-ic" style="background:rgba(236,64,122,.12)">📚</div><h3>کتابخانه آهنگ‌های من</h3><p>آهنگ‌هایت را با نام دلخواه ذخیره کن و هر لحظه از کتابخانه شخصی‌ات بازیابی کن.</p></div>
+    <div class="feat reveal"><div class="feat-ic" style="background:rgba(245,124,0,.12)">📄</div><h3>خروجی PDF</h3><p>از نسخه ترانسپوزشدهٔ آهنگت PDF بگیر تا برای اجرا، چاپ یا اشتراک‌گذاری آماده باشد.</p></div>
+    <div class="feat reveal"><div class="feat-ic" style="background:rgba(47,107,255,.12)">📋</div><h3>کپی و اشتراک‌گذاری</h3><p>نتیجه ترانسپوز را با یک کلیک کپی کن و در هر پیام‌رسانی برای هم‌گروهی‌هایت بفرست.</p></div>
+    <div class="feat reveal"><div class="feat-ic" style="background:rgba(142,36,170,.12)">🎛️</div><h3>کلید بمل / دیز</h3><p>نمایش آکوردها با دیز (#) یا بمل (b)؛ هرطور که راحت‌تر می‌خوانی و می‌نوازی.</p></div>
+    <div class="feat reveal"><div class="feat-ic" style="background:rgba(0,184,212,.12)">🌙</div><h3>رابط کاربری تیره و روان</h3><p>طراحی مدرن Dark با کنترل اندازهٔ متن و فاصله‌ها؛ مناسب اجرای زنده روی استیج کم‌نور.</p></div>
   </div>
 </section>
 
-<!-- ================= STORY ================= -->
-<section id="story">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="tag">داستان من</span>
-      <h2>از <span class="grad">آکورد باره‌دار</span> تا اپلیکیشن</h2>
-      <p>مسیری که از سیم‌های گیتار شروع شد و به خط‌های کد رسید.</p>
+<!-- ================= SCREENSHOTS ================= -->
+<section id="screens">
+  <div class="sec-head reveal">
+    <span class="sec-badge">📱 تصاویر</span>
+    <h2>محیط <span class="grad">برنامه</span> را ببینید</h2>
+    <p>نگاهی به صفحه‌های اصلی Delody بیندازید؛ ساده و بی‌پیچ‌وپرچ.</p>
+  </div>
+  <div class="shots">
+
+    <!-- Phone 1 : Transposer -->
+    <div class="shot reveal">
+      <div class="phone" id="phoneTransposer">
+        <div class="screen">
+          <div class="m-status"><span>۲۰:۱۱ ★</span><span>74⚡ 4G</span></div>
+          <div class="m-tabs"><span class="m-burger">≡</span><span class="m-tab">⏱ مترونوم</span><span class="m-tab on">🎼 ترنسپوزر</span></div>
+          <div class="m-row"><span class="m-sq c-red">🗑</span><span class="m-sq c-green">💾 ذخیره</span><span class="m-select lib"><span>کتابخانه آهنگ‌های من…</span><span>⌄</span></span></div>
+          <div class="m-area">...متن و آکورد را اینجا وارد کنید</div>
+          <div class="m-yellow">🔍 تشخیص هوشمند گام مبدأ</div>
+          <div class="m-row"><span class="m-select"><span>E</span><span>⌄</span></span><span class="m-sq c-blue">+</span><span class="m-sq c-blue">-</span><span class="m-select"><span>A</span><span>⌄</span></span></div>
+          <div class="m-row"><span class="m-sq c-red" style="flex:1">🗑</span><span class="m-sq c-orange" style="flex:1.3">PDF 📄</span><span class="m-sq c-purple" style="flex:1.2">b / #</span><span class="m-sq c-blue" style="flex:1.2">کپی</span><span class="m-sq c-green" style="flex:1.4">تبدیل</span></div>
+          <div class="m-panel">
+            <div class="m-sline"><span>🔎 اندازه</span><span class="m-slider"><i style="width:82%"></i><b style="right:82%"></b></span></div>
+            <div class="m-sline"><span>↔ فاصله</span><span class="m-slider"><i style="width:62%"></i><b style="right:62%"></b></span><span class="m-dir"><span>➡</span><span class="on">↔</span><span>⬅</span></span></div>
+            <div class="m-sline"><span class="m-sq c-blue">📜 حرکت</span><span class="m-slider"><i style="width:70%"></i><b style="right:70%"></b></span></div>
+          </div>
+          <div class="m-statusbar"><span>آماده</span><span>A ➡ E</span></div>
+          <div class="m-result">...نتیجه اینجا نمایش داده می‌شود</div>
+        </div>
+      </div>
+      <p><b>ترنسپوزر</b> — تبدیل آنی آکوردها</p>
     </div>
 
-    <div class="timeline">
-      <div class="t-item reveal">
-        <div class="t-icon">🌱</div>
-        <div class="t-card"><h3>شروع <em>برنامه‌نویسی</em></h3>
-        <p>تازه برنامه‌نویسی رو شروع کردم و در ابتدای استارت کارم هستم؛ هم‌زمان عاشق نوازندگی سازهای گیتار، پیانو و ملودیکا بودم و هستم.</p></div>
+    <!-- Phone 2 : Metronome -->
+    <div class="shot reveal">
+      <div class="phone">
+        <div class="screen">
+          <div class="m-status"><span>۲۰:۱۱ ★</span><span>74⚡ 4G</span></div>
+          <div class="m-tabs"><span class="m-burger">≡</span><span class="m-tab on">⏱ مترونوم</span><span class="m-tab">🎼 ترنسپوزر</span></div>
+          <div style="height:26px"></div>
+          <div class="metro-big">100</div>
+          <div class="metro-sub">BPM — ضربه در دقیقه</div>
+          <div class="m-dots"><span class="m-dot lit"></span><span class="m-dot"></span><span class="m-dot"></span><span class="m-dot"></span></div>
+          <div class="m-row" style="justify-content:center"><span style="color:#bbb">میزان:</span><span class="m-select" style="flex:0 0 74px;justify-content:center;color:#fff"><span>۴/۴</span><span>⌄</span></span></div>
+          <div class="m-sline"><span class="m-slider"><i style="width:64%"></i><b style="right:64%"></b></span></div>
+          <div class="m-row"><span class="m-sq c-gray" style="flex:1;font-size:13px">+</span><span class="m-sq c-green" style="flex:2.4;font-size:11px;padding:8px">▶ شروع</span><span class="m-sq c-gray" style="flex:1;font-size:13px">-</span></div>
+          <div class="m-dash">👇 نمی‌دونی چند بار ضرب بزنی؟ چند بار ضرب بزن (Tap)</div>
+          <div style="height:60px"></div>
+        </div>
       </div>
-      <div class="t-item reveal">
-        <div class="t-icon">🧗</div>
-        <div class="t-card"><h3>چالشِ <em>آکوردها</em></h3>
-        <p>در ابتدای نوازندگی و خوانندگی با گیتار، مشکلات فراوانی در گرفتن آکوردهای باره‌دار داشتم؛ پیدا کردن آکورد آهنگ‌ها و گام مورد نظر برای خواندن هم دشوار بود.</p></div>
-      </div>
-      <div class="t-item reveal">
-        <div class="t-icon">💡</div>
-        <div class="t-card"><h3>جرقهٔ <em>ایده</em></h3>
-        <p>به فکر ساخت برنامه‌ای در همین زمینه افتادم؛ ابزاری که دغدغهٔ هر نوازنده و خواننده‌ای را حل کند.</p></div>
-      </div>
-      <div class="t-item reveal">
-        <div class="t-icon">🚀</div>
-        <div class="t-card"><h3>تولد <em dir="ltr">Delody</em></h3>
-        <p>برنامه‌ای که به‌زودی در مارکت‌های ایرانی و خارجی قابل دسترسی خواهد بود.</p></div>
-      </div>
-      <div class="t-item reveal">
-        <div class="t-icon">🎨</div>
-        <div class="t-card"><h3>و هنوز <em>ادامه دارد…</em></h3>
-        <p>از آنجا که به باقی زمینه‌های هنر علاقه‌مندم، ایده‌های دیگری نیز در سر دارم که در آینده به آن‌ها می‌پردازم.</p></div>
-      </div>
+      <p><b>مترونوم</b> — ضرب‌آهنگ دقیق</p>
     </div>
 
-    <div class="letter reveal">
-      <h3>نامه‌ای از من ✍️</h3>
-      <p>تازه برنامه‌نویسی رو شروع کردم و در ابتدای استارت کارم به دلیل اینکه علاقه به نوازندگی سازهای گیتار و پیانو و ملودیکا داشتم و دارم و نیز در ابتدای نوازندگی و خوانندگی با گیتار دچار مشکلات فراوان در گرفتن آکوردهای باره‌دار داشتم و پیدا کردن آکورد آهنگ‌ها و گام مورد نظر برای خواندن نیز دشوار بوده، به فکر ساخت برنامه‌ای در این خصوص افتادم که به‌زودی در مارکت‌های ایرانی و خارجی قابل دسترسی خواهد بود. از آنجا که علاقه‌مند به باقی زمینه‌های هنر هستم، ایده‌های دیگری نیز در سر دارم که در آینده به آن می‌پردازم.</p>
-      <p>تصمیم گرفتم اسم برنامه‌ای که ساختم، به دلیل فعالیت در زمینهٔ موسیقی و همینطور نام خانوادگی خودم که دلدار می‌باشد، آن را <b dir="ltr" style="color:var(--cyan)">Delody</b> بنامم. امیدوارم مورد پسند و کارآمد باشد.<br>جهت ارتباط با اینجانب در فضای مجازی نظیر اینستاگرام و تلگرام، آی‌دی <b dir="ltr" style="color:var(--pink)">MrDeldar</b> را سرچ کنید.</p>
-      <div class="sign">— دلدار</div>
+    <!-- Phone 3 : About -->
+    <div class="shot reveal">
+      <div class="phone">
+        <div class="screen about">
+          <div class="about-circle">❤️</div>
+          <div class="about-title">Delody</div>
+          <div class="about-badge">نسخه 2.0 حرفه‌ای</div>
+          <div class="about-line"></div>
+          <div class="about-made">ساخته شده با ❤️ توسط</div>
+          <div class="about-name">مهدی دلدار</div>
+          <div class="about-line"></div>
+          <div class="social-row"><span class="social-btn ig">اینستاگرام 📷</span><span class="social-btn tg">تلگرام 📱</span></div>
+          <div class="close-pill">بستن</div>
+        </div>
+      </div>
+      <p><b>دربارهٔ ما</b> — ساخته‌شده با عشق</p>
     </div>
+
   </div>
 </section>
 
-<!-- ================= DELODY ================= -->
-<section id="delody">
-  <div class="wrap">
-    <div class="delody-card reveal">
-      <svg class="d-logo"><use href="#logoNote"/></svg>
-      <div class="d-word" dir="ltr">Delody</div>
-      <div class="formula">
-        <span class="f-box">Melody 🎵</span>
-        <span class="f-op">+</span>
-        <span class="f-box">دلدار ❤️</span>
-        <span class="f-op">=</span>
-        <span class="f-box res" dir="ltr">Delody</span>
-      </div>
-      <p style="color:var(--muted);max-width:52ch;margin:0 auto">به دلیل فعالیت در زمینهٔ موسیقی و نام خانوادگی‌ام «دلدار»، اسم برنامه‌ام را Delody گذاشتم؛ ترکیبی از ملودی و دلدار. امیدوارم مورد پسند و کارآمد باشد.</p>
-      <br>
-      <span class="badge-soon"><span class="dot"></span> به‌زودی در مارکت‌های ایرانی و خارجی</span>
-      <div class="features">
-        <div class="feat"><div class="ic">🎸</div><h4>راهنمای آکوردهای باره‌دار</h4><p>گذر آسان از سخت‌ترین آکوردها برای نوازندگان گیتار.</p></div>
-        <div class="feat"><div class="ic">🔍</div><h4>یافتن آکورد آهنگ‌ها</h4><p>آکورد هر آهنگ را سریع پیدا کن و راحت بنواز.</p></div>
-        <div class="feat"><div class="ic">🎤</div><h4>انتخاب گام خوانندگی</h4><p>گام مناسب صدایت را پیدا کن و با لذت بخوان.</p></div>
-      </div>
-    </div>
+<!-- ================= COMMENTS ================= -->
+<section id="comments">
+  <div class="sec-head reveal">
+    <span class="sec-badge">💬 نظرات</span>
+    <h2>صدای <span class="grad">شما</span>، دلودی را می‌سازد</h2>
+    <p>نظرت را بنویس، به نظر دیگران لایک بده؛ بازخورد تو سوختِ نسخه‌های بعدی است ❤️</p>
+  </div>
+  <div class="cm-wrap">
+    <form class="cm-form reveal" id="cmForm">
+      <h3>✍️ نظر خودت را منتشر کن</h3>
+      <div class="row"><input id="cmName" maxlength="30" placeholder="نام شما (مثلاً: علی گیتاریست)" required></div>
+      <textarea id="cmText" maxlength="500" placeholder="تجربه‌ات از Delody چی بوده؟ کدوم قابلیت رو بیشتر دوست داشتی؟" required></textarea>
+      <button type="submit" class="btn btn-cyan" style="width:100%;justify-content:center">🚀 انتشار نظر</button>
+    </form>
+    <div class="cm-count">💬 مجموع <b id="cmTotal">۰</b> نظر منتشر شده — <span style="color:var(--pink)">❤</span> روی نظری که پسندیدی بزن!</div>
+    <div class="cm-list" id="cmList"></div>
   </div>
 </section>
 
-<!-- ================= CONTACT ================= -->
-<section id="contact">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="tag">ارتباط با من</span>
-      <h2>در فضای مجازی <span class="grad">هم‌صدا شویم</span></h2>
-      <p>در اینستاگرام و تلگرام، آی‌دی زیر را سرچ کنید:</p>
+<!-- ================= DOWNLOAD ================= -->
+<section id="download">
+  <div class="dl-box reveal">
+    <h2>همین حالا <span class="grad">Delody</span> را نصب کن 🎧</h2>
+    <p>نسخهٔ ۲٫۰ حرفه‌ای آمادهٔ دانلود است؛ سبک، فارسی و بدون نیاز به اینترنت برای کارهای اصلی.</p>
+    <div class="dl-btns">
+      <a class="btn btn-bazaar bazaar-link" href="#" style="font-size:17px;padding:16px 34px">🛒 دانلود از کافه بازار</a>
+      <a class="btn btn-ghost" href="https://github.com/mrdeldar" target="_blank" rel="noopener" style="font-size:17px;padding:16px 34px">💻 گیت‌هاب توسعه‌دهنده</a>
     </div>
-    <div class="contact-grid reveal">
-      <a class="c-card ig" href="https://instagram.com/MrDeldar" target="_blank" rel="noopener">
-        <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.2 2.3.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1.1.4 2.3.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.9-.4 2.3-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1.1.4-2.3.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.2-2.3-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1.1-.4-2.3-.1-1.3-.1-1.7-.1-4.9s0-3.6.1-4.9c.1-1.2.2-1.9.4-2.3.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1.1-.4 2.3-.4 1.3-.1 1.7-.1 4.9-.1zM12 0C8.7 0 8.3 0 7 .1 5.8.2 4.9.4 4.1.7c-.8.3-1.5.8-2.2 1.4C1.3 2.8.8 3.5.5 4.3.2 5.1 0 6 .1 7.2 0 8.5 0 8.9 0 12.2s0 3.7.1 5c.1 1.2.3 2.1.6 2.9.3.8.8 1.5 1.4 2.2.7.7 1.4 1.1 2.2 1.4.8.3 1.7.5 2.9.6 1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.2-.1 2.1-.3 2.9-.6.8-.3 1.5-.8 2.2-1.4.7-.7 1.1-1.4 1.4-2.2.3-.8.5-1.7.6-2.9.1-1.3.1-1.7.1-5s0-3.7-.1-5c-.1-1.2-.3-2.1-.6-2.9-.3-.8-.8-1.5-1.4-2.2C21.2 1.3 20.5.8 19.7.5c-.8-.3-1.7-.5-2.9-.6C15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm7.9-10.4a1.4 1.4 0 1 1-2.9 0 1.4 1.4 0 0 1 2.9 0z"/></svg></span>
-        <span><b>اینستاگرام</b><span dir="ltr">@MrDeldar</span></span>
-      </a>
-      <a class="c-card tg" href="https://t.me/MrDeldar" target="_blank" rel="noopener">
-        <span class="ic"><svg viewBox="0 0 24 24"><path d="M9.04 15.51l-.38 5.36c.54 0 .78-.23 1.06-.51l2.55-2.44 5.28 3.87c.97.53 1.65.25 1.91-.9l3.48-16.3c.31-1.44-.51-2-1.46-1.65L1.06 8.82c-1.4.54-1.38 1.32-.24 1.67l5.22 1.63L18.16 4.5c.57-.37 1.08-.17.66.2L9.04 15.51z"/></svg></span>
-        <span><b>تلگرام</b><span dir="ltr">@MrDeldar</span></span>
-      </a>
-    </div>
-    <div class="id-row reveal">
-      <span class="id-pill">MrDeldar</span>
-      <button class="btn btn-ghost" id="copyId">📋 کپی آی‌دی</button>
-    </div>
+    <div class="dl-note">نسخهٔ اندروید ۶ به بالا • حجم کمتر از ۵ مگابایت • توسعه‌دهنده: <a href="https://github.com/mrdeldar" target="_blank" rel="noopener">مهدی دلدار (MrDeldar)</a></div>
   </div>
 </section>
 
+<!-- ================= FAQ ================= -->
+<section id="faq">
+  <div class="sec-head reveal">
+    <span class="sec-badge">❓ سؤالات متداول</span>
+    <h2>هر سؤال داری، <span class="grad">اینجا جواب بگیر</span></h2>
+  </div>
+  <div class="faq">
+    <div class="faq-item reveal"><button class="faq-q" type="button">Delody رایگان است؟<span class="arw">▼</span></button><div class="faq-a"><div>بله! دانلود و استفاده از امکانات اصلی رایگان است و نسخهٔ حرفه‌ای ۲٫۰ با امکانات کامل از طریق بازار در دسترس شماست.</div></div></div>
+    <div class="faq-item reveal"><button class="faq-q" type="button">برنامه به اینترنت نیاز دارد؟<span class="arw">▼</span></button><div class="faq-a"><div>خیر؛ ترانسپوزر، مترونوم و کتابخانهٔ آهنگ‌ها کاملاً آفلاین و داخل خود اپلیکیشن کار می‌کنند. اینترنت فقط برای دانلود و به‌روزرسانی لازم است.</div></div></div>
+    <div class="faq-item reveal"><button class="faq-q" type="button">تشخیص هوشمند گام مبدأ چگونه کار می‌کند؟<span class="arw">▼</span></button><div class="faq-a"><div>کافی است متن و آکوردهای آهنگ را وارد کنید و دکمهٔ زرد «تشخیص هوشمند گام مبدأ» را بزنید؛ Delody با تحلیل آکوردها، گام اصلی را پیدا می‌کند. این قابلیت انحصاری فقط داخل خود اپلیکیشن است.</div></div></div>
+    <div class="faq-item reveal"><button class="faq-q" type="button">چطور با توسعه‌دهنده در ارتباط باشم؟<span class="arw">▼</span></button><div class="faq-a"><div>در اینستاگرام و تلگرام آی‌دی <b style="color:var(--cyan)">MrDeldar</b> را جست‌وجو کنید، یا همین‌جا در بخش نظرات پیام بگذارید. همهٔ پیام‌ها خوانده می‌شوند ❤️</div></div></div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
 <footer>
-  <div class="wrap">
-    ساخته‌شده با ❤️ و 🎵 توسط <span class="grad">دلدار</span> — <span dir="ltr">Delody</span> © ۱۴۰۴
+  <div class="made">ساخته شده با ❤️ توسط <b>مهدی دلدار</b> — Melody 🎵 + دلدار ❤️ = <b style="color:var(--cyan)">Delody</b></div>
+  <div class="f-links">
+    <a href="https://github.com/mrdeldar" target="_blank" rel="noopener">💻 گیت‌هاب</a>
+    <a href="https://instagram.com/MrDeldar" target="_blank" rel="noopener">📷 اینستاگرام MrDeldar</a>
+    <a href="https://t.me/MrDeldar" target="_blank" rel="noopener">📱 تلگرام MrDeldar</a>
+    <a href="#comments">💬 نظرات</a>
   </div>
+  <div class="f-copy">© ۱۴۰ Delody — همهٔ حقوق محفوظ است.</div>
 </footer>
 
-<div id="toast">کپی شد ✔</div>
+<button id="toTop" title="بازگشت به بالا" type="button">↑</button>
+<div id="toast"></div>
 
 <script>
-/* ---------- background canvas: floating notes + waves (بهینه‌شده) ---------- */
-var cv = document.getElementById('bg'), cx = cv.getContext('2d');
-var W, H, t = 0;
-var CHARS = ['♪','♫','♬','♩'];
-var notesArr = [];
+/* ==========================================================
+   🔗 لینک دانلود از کافه بازار را این‌جا قرار دهید:
+========================================================== */
+var BAZAAR_URL = "https://cafebazaar.ir/app/com.mrdeldar.delody";
+document.querySelectorAll('.bazaar-link').forEach(function(a){
+  a.href = BAZAAR_URL; a.target = "_blank"; a.rel = "noopener";
+});
 
-function resize(){ 
-  W = cv.width = window.innerWidth; 
-  H = cv.height = window.innerHeight; 
-}
-window.addEventListener('resize', resize); 
-resize();
-
-function makeNote(init){
-  return {
-    x: Math.random()*W,
-    y: init ? Math.random()*H : H + 40,
-    s: 14 + Math.random()*24,
-    v: .3 + Math.random()*.8,
-    ch: CHARS[(Math.random()*CHARS.length)|0],
-    h: 185 + Math.random()*115,
-    a: .08 + Math.random()*.2,
-    w: Math.random()*Math.PI*2
-  };
+/* ---------- toast ---------- */
+var toastEl = document.getElementById('toast');
+var toastTimer = null;
+function showToast(msg){
+  toastEl.textContent = msg;
+  toastEl.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ toastEl.classList.remove('show'); }, 2600);
 }
 
-// کاهش تعداد نت‌ها از ۲۶ به ۱۰ برای عملکرد بسیار بهتر
-for (var i=0; i<10; i++) notesArr.push(makeNote(true));
+/* ---------- کپی تصویر موبایل در هدر (بدون تکرار id) ---------- */
+(function(){
+  var srcPhone = document.getElementById('phoneTransposer');
+  var clonePhone = srcPhone.cloneNode(true);
+  clonePhone.removeAttribute('id');
+  var heroBox = document.getElementById('heroPhone');
+  heroBox.innerHTML = '';
+  heroBox.appendChild(clonePhone);
+})();
 
-function loop(){
-  t += .016;
-  // پاک‌کردن بهینه‌تر با شفافیت به جای clearRect کامل
-  cx.fillStyle = 'rgba(7,10,19,0.3)';
-  cx.fillRect(0,0,W,H);
-  
-  for (var l=0; l<3; l++){
-    cx.beginPath();
-    for (var x=0; x<=W; x+=14){
-      var y = H*.8 + l*26 + Math.sin(x*.006 + t*(1+l*.35) + l*2)*(12+l*8);
-      x===0 ? cx.moveTo(x,y) : cx.lineTo(x,y);
+/* ---------- انیمیشن ظاهرشدن هنگام اسکرول ---------- */
+var revealObs = new IntersectionObserver(function(entries){
+  entries.forEach(function(en){
+    if(en.isIntersecting){ en.target.classList.add('visible'); revealObs.unobserve(en.target); }
+  });
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(function(el){ revealObs.observe(el); });
+
+/* ---------- شمارنده‌های متحرک ---------- */
+function faNum(n){ return n.toLocaleString('fa-IR'); }
+var countObs = new IntersectionObserver(function(entries){
+  entries.forEach(function(en){
+    if(!en.isIntersecting) return;
+    var el = en.target;
+    var target = parseInt(el.getAttribute('data-count'), 10);
+    var suffix = el.getAttribute('data-suffix') || '';
+    var cur = 0;
+    var step = Math.max(1, Math.round(target/60));
+    var iv = setInterval(function(){
+      cur += step;
+      if(cur >= target){ cur = target; clearInterval(iv); }
+      el.textContent = faNum(cur) + suffix;
+    }, 26);
+    countObs.unobserve(el);
+  });
+},{threshold:.6});
+document.querySelectorAll('[data-count]').forEach(function(el){ countObs.observe(el); });
+
+/* ================= نظرات + لایک ================= */
+var LS_CM = 'delody_comments_v1';
+var LS_LK = 'delody_likes_v1';
+var AV_COLORS = ['#00e5ff','#0dc850','#fcd116','#ec407a','#2196f3','#f57c00','#8e24aa'];
+var seedComments = [
+  {id:'s1', name:'رضا محمدی', text:'ترانسپوزر فوق‌العاده دقیقه! دیگه لازم نیست آکوردها رو دستی جابه‌جا کنم. دمت گرم مهدی جان 👌', likes:24, ts:Date.now()-86400000*6},
+  {id:'s2', name:'سارا احمدی', text:'مترونومش دقیقاً همونیه که برای تمرین پیانو لازم داشتم. رابط کاربری هم خیلی روان و خوشگله ❤️', likes:17, ts:Date.now()-86400000*3},
+  {id:'s3', name:'امیر گیتاریست', text:'تشخیص هوشمند گام واقعاً کارمو راه انداخت؛ برای اجرای زنده و آکورد باره‌دار عالی جواب می‌ده 🎸', likes:9, ts:Date.now()-86400000*1}
+];
+function loadComments(){
+  try{
+    var raw = localStorage.getItem(LS_CM);
+    if(raw){ return JSON.parse(raw); }
+  }catch(err){}
+  try{ localStorage.setItem(LS_CM, JSON.stringify(seedComments)); }catch(err){}
+  return seedComments;
+}
+function loadLikes(){
+  try{ return new Set(JSON.parse(localStorage.getItem(LS_LK) || '[]')); }
+  catch(err){ return new Set(); }
+}
+var commentData = loadComments();
+var likedIds = loadLikes();
+
+function escHtml(s){
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function faDate(ts){
+  return new Intl.DateTimeFormat('fa-IR',{day:'numeric',month:'long',year:'numeric'}).format(new Date(ts));
+}
+
+function renderComments(){
+  var list = document.getElementById('cmList');
+  list.innerHTML = '';
+  if(!commentData.length){
+    list.innerHTML = '<div class="cm-empty">هنوز نظری ثبت نشده؛ اولین نفر باش! ✨</div>';
+  }
+  var sorted = commentData.slice().sort(function(a,b){ return b.ts - a.ts; });
+  sorted.forEach(function(c){
+    var liked = likedIds.has(c.id);
+    var card = document.createElement('div');
+    card.className = 'cm-card';
+    var color = AV_COLORS[(c.name.charCodeAt(0) || 0) % AV_COLORS.length];
+    card.innerHTML =
+      '<div class="cm-top">' +
+        '<span class="cm-av" style="background:' + color + '">' + escHtml(c.name.trim().charAt(0) || '؟') + '</span>' +
+        '<div><div class="cm-name">' + escHtml(c.name) + '</div><div class="cm-date">🗓 ' + faDate(c.ts) + '</div></div>' +
+      '</div>' +
+      '<div class="cm-text">' + escHtml(c.text) + '</div>' +
+      '<div class="cm-foot"><button type="button" class="like-btn' + (liked ? ' liked' : '') + '" data-id="' + escHtml(c.id) + '"><span class="hrt">' + (liked ? '❤️' : '🤍') + '</span><span>' + faNum(c.likes) + '</span> لایک</button></div>';
+    list.appendChild(card);
+  });
+  document.getElementById('cmTotal').textContent = faNum(commentData.length);
+  list.querySelectorAll('.like-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var id = btn.getAttribute('data-id');
+      var item = null;
+      for(var i=0;i<commentData.length;i++){ if(commentData[i].id === id){ item = commentData[i]; break; } }
+      if(!item) return;
+      if(likedIds.has(id)){
+        likedIds.delete(id);
+        item.likes = Math.max(0, item.likes - 1);
+      }else{
+        likedIds.add(id);
+        item.likes += 1;
+        showToast('❤️ ممنون از پسندت!');
+      }
+      try{
+        localStorage.setItem(LS_LK, JSON.stringify(Array.from(likedIds)));
+        localStorage.setItem(LS_CM, JSON.stringify(commentData));
+      }catch(err){}
+      renderComments();
+    });
+  });
+}
+
+document.getElementById('cmForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  var nameVal = document.getElementById('cmName').value.trim();
+  var textVal = document.getElementById('cmText').value.trim();
+  if(!nameVal || !textVal){ showToast('⚠️ نام و متن نظر را کامل کن'); return; }
+  commentData.push({ id:'u' + Date.now(), name:nameVal, text:textVal, likes:0, ts:Date.now() });
+  try{ localStorage.setItem(LS_CM, JSON.stringify(commentData)); }catch(err){}
+  document.getElementById('cmName').value = '';
+  document.getElementById('cmText').value = '';
+  renderComments();
+  showToast('🚀 نظرت منتشر شد! سپاس ❤️');
+  document.getElementById('cmList').scrollIntoView({behavior:'smooth', block:'start'});
+});
+renderComments();
+
+/* ================= سؤالات متداول ================= */
+document.querySelectorAll('.faq-q').forEach(function(q){
+  q.addEventListener('click', function(){
+    var item = q.parentElement;
+    var ans = item.querySelector('.faq-a');
+    var wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(function(fi){
+      fi.classList.remove('open');
+      fi.querySelector('.faq-a').style.maxHeight = null;
+    });
+    if(!wasOpen){
+      item.classList.add('open');
+      ans.style.maxHeight = ans.scrollHeight + 'px';
     }
-    cx.strokeStyle = 'hsla('+(200+l*40)+',80%,65%,.05)';
-    cx.lineWidth = 2; cx.stroke();
-  }
-  
-  for (var n of notesArr){
-    n.y -= n.v; n.x += Math.sin(t + n.w)*.3;
-    if (n.y < -40) { var f = makeNote(false); n.x=f.x; n.y=f.y; n.s=f.s; n.v=f.v; n.ch=f.ch; n.h=f.h; n.a=f.a; n.w=f.w; }
-    cx.font = n.s + 'px serif';
-    cx.fillStyle = 'hsla('+n.h+',80%,70%,'+n.a+')';
-    cx.fillText(n.ch, n.x, n.y);
-  }
-  requestAnimationFrame(loop);
-}
-
-// اجرای انیمیشن فقط اگر Canvas مخفی نباشد (در موبایل توسط CSS مخفی می‌شود)
-if (window.getComputedStyle(cv).display !== 'none') {
-  loop();
-}
-
-/* ---------- reveal on scroll ---------- */
-var io = new IntersectionObserver(function(es){
-  es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
-},{threshold:.15});
-document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
-
-/* ---------- piano audio ---------- */
-var AC = null;
-function actx(){
-  if (!AC) AC = new (window.AudioContext || window.webkitAudioContext)();
-  if (AC.state === 'suspended') AC.resume();
-  return AC;
-}
-function tone(freq, dur){
-  dur = dur || .9;
-  var ac = actx(), now = ac.currentTime;
-  var o = ac.createOscillator(), g = ac.createGain();
-  var o2 = ac.createOscillator(), g2 = ac.createGain();
-  o.type = 'triangle'; o.frequency.value = freq;
-  o2.type = 'sine'; o2.frequency.value = freq*2;
-  g.gain.setValueAtTime(0, now);
-  g.gain.linearRampToValueAtTime(.22, now+.015);
-  g.gain.exponentialRampToValueAtTime(.0001, now+dur);
-  g2.gain.setValueAtTime(.05, now);
-  g2.gain.exponentialRampToValueAtTime(.0001, now+dur*.7);
-  o.connect(g); g.connect(ac.destination);
-  o2.connect(g2); g2.connect(ac.destination);
-  o.start(now); o2.start(now);
-  o.stop(now+dur+.05); o2.stop(now+dur+.05);
-}
-var piano = document.getElementById('piano');
-function flash(el){ el.classList.add('active'); setTimeout(function(){ el.classList.remove('active'); }, 220); }
-piano.addEventListener('pointerdown', function(ev){
-  var k = ev.target.closest('.key');
-  if (!k) return;
-  tone(parseFloat(k.dataset.freq));
-  flash(k);
-});
-var KEYMAP = {};
-document.querySelectorAll('.key').forEach(function(k){ KEYMAP[k.dataset.k] = k; });
-window.addEventListener('keydown', function(e){
-  if (e.repeat) return;
-  var k = KEYMAP[e.key.toLowerCase()];
-  if (k){ tone(parseFloat(k.dataset.freq)); flash(k); }
-});
-
-/* melody */
-var MELODY = [329.63, 392, 440, 523.25, 493.88, 440, 392, 329.63, 293.66, 329.63, 261.63];
-document.getElementById('playMelody').addEventListener('click', function(){
-  MELODY.forEach(function(f, idx){
-    setTimeout(function(){
-      tone(f, .8);
-      var el = piano.querySelector('[data-freq="'+f+'"]');
-      if (el) flash(el);
-    }, idx*320);
   });
 });
 
-/* ---------- copy id + toast ---------- */
-var toastEl = document.getElementById('toast'), toastTm;
-function toast(msg){
-  toastEl.textContent = msg;
-  toastEl.classList.add('show');
-  clearTimeout(toastTm);
-  toastTm = setTimeout(function(){ toastEl.classList.remove('show'); }, 2200);
-}
-document.getElementById('copyId').addEventListener('click', function(){
-  if (navigator.clipboard) navigator.clipboard.writeText('MrDeldar').then(function(){ toast('آی‌دی کپی شد ✔'); });
-  else toast('MrDeldar');
+/* ================= دکمهٔ بازگشت به بالا ================= */
+var toTopBtn = document.getElementById('toTop');
+window.addEventListener('scroll', function(){
+  if(window.scrollY > 600){ toTopBtn.classList.add('show'); }
+  else{ toTopBtn.classList.remove('show'); }
+}, {passive:true});
+toTopBtn.addEventListener('click', function(){
+  window.scrollTo({top:0, behavior:'smooth'});
 });
 </script>
 </body>
